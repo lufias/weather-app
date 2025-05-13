@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import WeatherCard from './WeatherCard.vue';
 
 const router = useRouter();
+
+const isMobile = computed(() => window.innerWidth <= 768);
 
 const weatherList = ref([
   { id: 1, city: 'New York', temp: 22, desc: 'Sunny', high: 25, low: 18, isCurrentLocation: true },
@@ -13,36 +15,52 @@ const weatherList = ref([
 ]);
 
 function goToDetails(id: number) {
-  router.push({ name: 'WeatherDetails', params: { id } });
+  if (isMobile.value) {
+    router.push(`/details/${id}`);
+  } else {
+    router.push({ name: 'WeatherDetails', params: { id } });
+  }
 }
 </script>
 
 <template>
-    <div class="weather-list">
-      <div
-        v-for="item in weatherList"
-        :key="item.id"
-        class="weather-list-item"
-        @click="goToDetails(item.id)"
-      >
-        <WeatherCard
-          :location="item.city"
-          :temperature="item.temp"
-          :description="item.desc"
-          :high="item.high"
-          :low="item.low"
-          :isCurrentLocation="item.isCurrentLocation"
-        />
-      </div>
+  <div class="weather-list" :class="{ 'mobile': isMobile }">
+    <div
+      v-for="item in weatherList"
+      :key="item.id"
+      class="weather-list-item"
+      @click="goToDetails(item.id)"
+    >
+      <WeatherCard
+        :location="item.city"
+        :temperature="item.temp"
+        :description="item.desc"
+        :high="item.high"
+        :low="item.low"
+        :isCurrentLocation="item.isCurrentLocation"
+      />
     </div>
-  </template>
+  </div>
+</template>
 
 <style scoped>
 .weather-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 1rem;
 }
+
+.weather-list.mobile {
+  padding: 0;
+}
+
+.weather-list.mobile .weather-list-item {
+  border-radius: 0;
+  margin: 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
 .weather-list-item {
   cursor: pointer;
 }

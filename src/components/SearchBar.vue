@@ -35,37 +35,6 @@ function handleSelect(val: string) {
     Selected: <strong>{{ selected }}</strong>
 </div> -->
 
-<template>
-  <div class="search-bar" ref="searchBarRef">
-    <div class="search-input-wrapper">
-      <input
-        v-model="inputValue"
-        @input="onInput"
-        @focus="showSuggestions = true"
-        type="text"
-        class="search-input"
-        :placeholder="placeholder"
-      />
-      <span class="search-icon">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </span>
-      <button v-if="inputValue" class="clear-btn" @click="clearInput" aria-label="Clear">
-        ×
-      </button>
-    </div>
-    <ul v-if="showSuggestions && suggestions.length" class="suggestions-list">
-      <li
-        v-for="(suggestion, idx) in suggestions"
-        :key="idx"
-        class="suggestion-item"
-        @click="selectSuggestion(suggestion)"
-      >
-        {{ suggestion }}
-      </li>
-    </ul>
-  </div>
-</template>
-
 <script lang="ts" setup>
 import { ref, watch, onMounted, onBeforeUnmount, defineProps, defineEmits } from 'vue';
 
@@ -119,6 +88,37 @@ watch(() => props.suggestions, (newVal) => {
   if (!newVal.length) showSuggestions.value = false;
 });
 </script>
+
+<template>
+  <div class="search-bar" ref="searchBarRef">
+    <div class="search-input-wrapper">
+      <input
+        v-model="inputValue"
+        @input="onInput"
+        @focus="showSuggestions = true"
+        type="text"
+        class="search-input"
+        :placeholder="placeholder"
+      />
+      <span class="search-icon">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </span>
+      <button v-if="inputValue" class="clear-btn" @click="clearInput" aria-label="Clear">
+        ×
+      </button>
+    </div>
+    <ul v-if="showSuggestions && suggestions.length" class="suggestions-list">
+      <li
+        v-for="(suggestion, idx) in suggestions"
+        :key="idx"
+        class="suggestion-item"
+        @click="selectSuggestion(suggestion)"
+      >
+        {{ suggestion }}
+      </li>
+    </ul>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 // Color variables
