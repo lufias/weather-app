@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import Header from './Header.vue';
+import ContentCard from './ContentCard.vue';
 // Layout component logic can be added here
 </script>
 
 <template>
-  <div class="layout">
-    <Header />
+  <div class="layout">    
     <main class="main-content">
-      <router-view></router-view>
+      <ContentCard>
+        <router-view></router-view>
+      </ContentCard>
     </main>
   </div>
 </template>
@@ -41,6 +42,6 @@ import Header from './Header.vue';
 
 .main-content {
   flex: 1;
-  padding: 2rem;
+  padding: 0; /* Remove extra padding, handled by card */
 }
 </style> 

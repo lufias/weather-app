@@ -5,7 +5,7 @@ import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
 
 <template>
   <header class="header">
-    <router-link :to="{ name: 'Home' }" class="title-link">
+    <router-link to="/" class="title-link">
       <span class="title">Weather</span>
     </router-link>
     <router-link :to="{ name: 'EditProfile' }" class="profile-icon" aria-label="Edit Profile">
