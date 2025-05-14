@@ -24,8 +24,9 @@ import SearchContainer from '../SearchContainer.vue';
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 1.5rem 1rem 1.5rem;
-  background: white;
+  padding: 1rem;
+  background: #f8fafc;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
 }
 
 .title-link {
@@ -59,6 +60,8 @@ import SearchContainer from '../SearchContainer.vue';
 @media (max-width: 768px) {
   .header {
     padding: 1.5rem 1rem 1rem 1rem;
+    background: white;
+    box-shadow: none;
   }
   
   .title {

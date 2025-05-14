@@ -49,6 +49,7 @@ function goToDetails(id: number) {
     </template>
     <template v-else>
       <div class="weather-list-placeholder">
+        <div class="placeholder-icon">☁️</div>
         No locations added yet. Use the search above to add a city.
       </div>
     </template>
@@ -61,6 +62,9 @@ function goToDetails(id: number) {
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+  min-height: 60vh;
+  justify-content: center;
+  align-items: center;
 }
 
 .weather-list.mobile {
@@ -78,9 +82,21 @@ function goToDetails(id: number) {
 }
 
 .weather-list-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  color: #888;
-  font-size: 1.1rem;
-  margin: 2rem 0;
+  color: #b0b3b8;
+  font-size: 1.35rem;
+  font-weight: 400;
+  margin: 0;
+  min-height: 30vh;
+}
+
+.weather-list-placeholder .placeholder-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.2rem;
+  color: #d1d5db;
 }
 </style> 
