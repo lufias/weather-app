@@ -22,7 +22,7 @@ import WeatherDetailsWeekly from './WeatherDetailsWeekly.vue';
   background: #fff;
   border-radius: 1.2rem;
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 0;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;

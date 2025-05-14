@@ -1,7 +1,15 @@
 <template>
   <div class="weather-details-header">
-    <!-- Location, date, weather icon, temperature, description -->
-    <div class="header-location">Location Name</div>
+    <!-- Location section with icons -->
+    <div class="location-container">
+      <button class="icon-button">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <div class="header-location">Location Name</div>
+      <button class="icon-button">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
     <div class="header-date">Monday, 20 December 2021</div>
     <div class="header-icon">🌦️</div>
     <div class="header-temp">24° C</div>
@@ -20,10 +28,34 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.location-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #6b7280;
+  transition: color 0.2s ease;
+}
+
+.icon-button:hover {
+  color: #4b5563;
+}
+
 .header-location {
   font-size: 1.2rem;
   font-weight: 600;
+  margin: 0 1rem;
 }
+
 .header-date {
   font-size: 1rem;
   color: #7c7c7c;
