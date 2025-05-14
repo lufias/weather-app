@@ -1,7 +1,40 @@
 import type { Module } from 'vuex';
 
+interface WeatherCondition {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
+interface CurrentWeather {
+  dt: number;
+  sunrise: number;
+  sunset: number;
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  uvi: number;
+  clouds: number;
+  visibility: number;
+  wind_speed: number;
+  wind_deg: number;
+  wind_gust: number;
+  weather: WeatherCondition[];
+}
+
+interface WeatherData {
+  lat: number;
+  lon: number;
+  timezone: string;
+  timezone_offset: number;
+  current: CurrentWeather;
+}
+
 export interface WeatherState {
-  weatherByLocation: Record<number, any>; // key: location id, value: weather data
+  weatherByLocation: Record<number, WeatherData>;
 }
 
 const weather: Module<WeatherState, any> = {
