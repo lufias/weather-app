@@ -55,6 +55,7 @@ onMounted(async () => {
           :high="getWeather(item.id)?.current?.temp ?? 0"
           :low="getWeather(item.id)?.current?.temp ?? 0"
           :isCurrentLocation="item.isCurrentLocation"
+          :weatherIcon="getWeather(item.id)?.current?.weather[0]?.icon"
         />
       </div>
     </template>
@@ -99,7 +100,7 @@ onMounted(async () => {
 
 .weather-list-placeholder {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -116,9 +117,7 @@ onMounted(async () => {
   color: #d1d5db;
 }
 
-.remove-all-btn {
-  position: absolute;
-  top: 1.2rem;
+.remove-all-btn {  
   right: 1.2rem;
   background: #fff;
   color: #6366f1;
@@ -131,6 +130,7 @@ onMounted(async () => {
   box-shadow: 0 2px 8px rgba(99,102,241,0.08);
   z-index: 2;
   transition: background 0.15s, color 0.15s;
+  align-self: flex-end;
 }
 .remove-all-btn:hover {
   background: #6366f1;

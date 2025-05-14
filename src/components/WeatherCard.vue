@@ -17,7 +17,8 @@
 /> -->
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, computed } from 'vue';
+import { getWeatherGradient } from '../utils/WeatherUtils';
 
 const props = defineProps({
   location: { type: String, required: true },
@@ -26,16 +27,24 @@ const props = defineProps({
   high: { type: Number, required: false },
   low: { type: Number, required: false },
   isCurrentLocation: { type: Boolean, default: false },
+  weatherIcon: { type: String, required: false },
 });
 
 const capitalizeFirst = (str: string) => {
   if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
+
+const cardStyle = computed(() => {
+  const gradient = getWeatherGradient(props.weatherIcon);
+  return {
+    background: gradient
+  };
+});
 </script>
 
 <template>
-  <div class="weather-card" :class="{ 'current-location': props.isCurrentLocation }">
+  <div class="weather-card" :class="{ 'current-location': props.isCurrentLocation }" :style="cardStyle">
     <div class="weather-card__header">
       <div>
         <div class="weather-card__location main">
@@ -54,14 +63,6 @@ const capitalizeFirst = (str: string) => {
         </span>
       </div>
     </div>
-    <div class="weather-card__icon">
-      <!-- Placeholder for weather icon -->
-      <svg width="2.5rem" height="2.5rem" viewBox="0 0 48 48" fill="none">
-        <circle cx="24" cy="24" r="20" fill="#e0e7ff" />
-        <ellipse cx="24" cy="28" rx="10" ry="6" fill="#a5b4fc" />
-        <ellipse cx="30" cy="22" rx="8" ry="5" fill="#fbbf24" />
-      </svg>
-    </div>
   </div>
 </template>
 
@@ -71,7 +72,6 @@ const capitalizeFirst = (str: string) => {
   max-width: 600px;
   margin: 0 auto;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
   color: #fff;
   border-radius: 1.2rem;
   padding: 1.5rem 1.2rem 1.2rem 1.2rem;
@@ -137,14 +137,6 @@ const capitalizeFirst = (str: string) => {
     font-size: 0.95rem;
     opacity: 0.85;
     margin: 0;
-  }
-
-  &__icon {
-    position: absolute;
-    top: 1.2rem;
-    right: 1.2rem;
-    opacity: 0.25;
-    pointer-events: none;
   }
 
   &__location.main {
