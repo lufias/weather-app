@@ -7,12 +7,17 @@ const router = useRouter();
 
 const isMobile = computed(() => window.innerWidth <= 768);
 
-const weatherList = ref([
-  { id: 1, city: 'New York', temp: 22, desc: 'Sunny', high: 25, low: 18, isCurrentLocation: true },
-  { id: 2, city: 'London', temp: 18, desc: 'Cloudy', high: 20, low: 15, isCurrentLocation: false },
-  { id: 3, city: 'Tokyo', temp: 25, desc: 'Rainy', high: 27, low: 21, isCurrentLocation: false },
-  { id: 4, city: 'Sydney', temp: 20, desc: 'Windy', high: 23, low: 17, isCurrentLocation: false },
-]);
+interface WeatherItem {
+  id: number;
+  city: string;
+  temp: number;
+  desc: string;
+  high: number;
+  low: number;
+  isCurrentLocation: boolean;
+}
+
+const weatherList = ref<WeatherItem[]>([]);
 
 function goToDetails(id: number) {
   if (isMobile.value) {
@@ -25,21 +30,28 @@ function goToDetails(id: number) {
 
 <template>
   <div class="weather-list" :class="{ 'mobile': isMobile }">
-    <div
-      v-for="item in weatherList"
-      :key="item.id"
-      class="weather-list-item"
-      @click="goToDetails(item.id)"
-    >
-      <WeatherCard
-        :location="item.city"
-        :temperature="item.temp"
-        :description="item.desc"
-        :high="item.high"
-        :low="item.low"
-        :isCurrentLocation="item.isCurrentLocation"
-      />
-    </div>
+    <template v-if="weatherList.length">
+      <div
+        v-for="item in weatherList"
+        :key="item.id"
+        class="weather-list-item"
+        @click="goToDetails(item.id)"
+      >
+        <WeatherCard
+          :location="item.city"
+          :temperature="item.temp"
+          :description="item.desc"
+          :high="item.high"
+          :low="item.low"
+          :isCurrentLocation="item.isCurrentLocation"
+        />
+      </div>
+    </template>
+    <template v-else>
+      <div class="weather-list-placeholder">
+        No locations added yet. Use the search above to add a city.
+      </div>
+    </template>
   </div>
 </template>
 
@@ -63,5 +75,12 @@ function goToDetails(id: number) {
 
 .weather-list-item {
   cursor: pointer;
+}
+
+.weather-list-placeholder {
+  text-align: center;
+  color: #888;
+  font-size: 1.1rem;
+  margin: 2rem 0;
 }
 </style> 

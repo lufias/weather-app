@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import SearchBar from './SearchBar.vue';
+import { db } from '../db/locationDB';
 
 interface CitySuggestion {
   name: string;
@@ -56,9 +57,16 @@ function handleUpdate(val: string) {
   fetchCitySuggestions(val);
 }
 
-function handleSelect(val: SuggestionItem) {
+async function handleSelect(val: SuggestionItem) {
   console.log('Selected city:', val);
-  // TODO: Handle selected city coordinates
+  await db.locations.clear(); // Only keep one location
+  await db.locations.add({
+    city: val.city,
+    state: val.state,
+    country: val.country,
+    lat: val.lat,
+    lon: val.lon
+  });
 }
 </script>
 
