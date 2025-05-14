@@ -9,7 +9,7 @@
   <div class="weather-details-header">
     <!-- Location section with icons -->
     <div class="location-container">
-      <button class="icon-button">
+      <button class="icon-button back-button">
         <i class="fas fa-arrow-left"></i>
       </button>
       <div class="header-location">Location Name</div>
@@ -55,6 +55,14 @@
     border: none;
     cursor: pointer;    
     transition: color 0.2s ease;
+
+    &.back-button {
+      visibility: hidden; // Hide by default on desktop
+
+      @media (max-width: 768px) {
+        visibility: visible; // Show on mobile        
+      }
+    }
 
     i {
       font-size: 1.2rem;

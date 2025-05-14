@@ -30,6 +30,7 @@ const routes: RouteRecordRaw[] = [
       // SPLIT LAYOUT ROUTE WITH DETAILS (Desktop/Tablet)
       {
         path: 'details/:id',
+        name: 'details',
         components: {
           left: WeatherList,
           right: WeatherDetails

@@ -34,12 +34,12 @@ import Header from './Header.vue';
 .split-layout__left {
   flex: 1;
   overflow-y: auto;
-  min-width:  30rem;
+  /* min-width:  30rem; */
 }
 .split-layout__right {
   flex: 1;
   overflow-y: auto;
-  min-width: 30rem;
+  /* min-width: 30rem; */
 }
 
 .split-layout__left::-webkit-scrollbar,

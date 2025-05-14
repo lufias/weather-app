@@ -14,11 +14,7 @@ const locations = computed(() => [...store.getters['locations/getLocations']]);
 const getWeather = (id: number) => store.getters['weather/getCurrentWeather'](id);
 
 function goToDetails(id: number) {
-  if (isMobile.value) {
-    router.push(`/details/${id}`);
-  } else {
-    router.push({ name: 'WeatherDetails', params: { id } });
-  }
+  router.push({ name: 'details', params: { id: id.toString() } });
 }
 
 function removeAll() {

@@ -34,6 +34,7 @@ const props = defineProps({
   min-height: 60px;
   padding: 0.8rem 1.2rem;
   gap: 1.2rem;
+  background: #D2DFFF;
 }
 .card-icon {
   font-size: 2rem;

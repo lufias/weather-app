@@ -46,7 +46,7 @@ const locations: Module<LocationsState, any> = {
       const id = await db.locations.add(location);
       const newLoc = { ...location, id };
       commit('ADD_LOCATION', newLoc);
-      await dispatch('weather/fetchWeather', {
+      await dispatch('weather/fetchCurrentWeather', {
         locationId: id,
         lat: location.lat,
         lon: location.lon
