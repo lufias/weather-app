@@ -9,7 +9,7 @@ const store = useStore();
 
 const isMobile = computed(() => window.innerWidth <= 768);
 
-const locations = computed(() => store.getters['locations/getLocations']);
+const locations = computed(() => [...store.getters['locations/getLocations']]);
 const getWeather = (id: number) => store.getters['weather/getWeatherByLocation'](id);
 
 function goToDetails(id: number) {

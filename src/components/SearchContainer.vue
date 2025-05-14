@@ -2,6 +2,8 @@
 import { ref } from 'vue';
 import SearchBar from './SearchBar.vue';
 import store from '../store';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 interface CitySuggestion {
   name: string;
@@ -58,14 +60,19 @@ function handleUpdate(val: string) {
 }
 
 async function handleSelect(val: SuggestionItem) {
-  console.log('Selected city:', val);
-  await store.dispatch('locations/addLocation', {
+  const result = await store.dispatch('locations/addLocation', {
     city: val.city,
     state: val.state,
     country: val.country,
     lat: val.lat,
     lon: val.lon
   });
+  if (result && result.status === 'duplicate') {
+    toast.warn('Location already exists!');
+    return;
+  }
+  // Reload locations to get the new ID and update UI
+  await store.dispatch('locations/loadLocations');
 }
 </script>
 
