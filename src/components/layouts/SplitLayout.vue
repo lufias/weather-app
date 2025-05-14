@@ -19,11 +19,39 @@
   max-width: 56.25rem;
   margin: 2rem auto;
   gap: 2rem;
+  height: 80vh;
 }
 .split-layout__left {
   flex: 1;
+  overflow-y: auto;
+  min-width: 0;
 }
 .split-layout__right {
   flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.split-layout__left::-webkit-scrollbar,
+.split-layout__right::-webkit-scrollbar {
+  width: 4px;
+  background: transparent;
+}
+
+.split-layout__left::-webkit-scrollbar-thumb,
+.split-layout__right::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.split-layout__left:hover::-webkit-scrollbar-thumb,
+.split-layout__right:hover::-webkit-scrollbar-thumb {
+  background: #b3b3b3;
+}
+
+.split-layout__left::-webkit-scrollbar-track,
+.split-layout__right::-webkit-scrollbar-track {
+  background: transparent;
 }
 </style>    
