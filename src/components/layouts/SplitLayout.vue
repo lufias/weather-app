@@ -26,7 +26,7 @@ import Header from './Header.vue';
 
 .split-layout {
   display: flex;
-  max-width: 56.25rem;
+  max-width: 80rem;
   margin: 2rem auto;
   gap: 2rem;
   height: 80vh;
@@ -34,12 +34,12 @@ import Header from './Header.vue';
 .split-layout__left {
   flex: 1;
   overflow-y: auto;
-  min-width: 0;
+  min-width:  30rem;
 }
 .split-layout__right {
   flex: 1;
   overflow-y: auto;
-  min-width: 0;
+  min-width: 30rem;
 }
 
 .split-layout__left::-webkit-scrollbar,
