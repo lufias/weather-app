@@ -1,19 +1,29 @@
 <template>
-  <div class="split-layout">
-    <div class="split-layout__left">
-      <router-view name="left" />
-    </div>
-    <div class="split-layout__right">
-      <router-view name="right" />
+  <div class="split-layout-container">
+    <Header />
+    <div class="split-layout">
+      <div class="split-layout__left">
+        <router-view name="left" />
+      </div>
+      <div class="split-layout__right">
+        <router-view name="right" />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import Header from './Header.vue';
 // No direct imports needed for named views
 </script>
 
 <style scoped>
+.split-layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .split-layout {
   display: flex;
   max-width: 56.25rem;

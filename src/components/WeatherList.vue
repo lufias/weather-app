@@ -3,6 +3,7 @@ import { computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import WeatherCard from './WeatherCard.vue';
+import SearchContainer from './SearchContainer.vue';
 
 const router = useRouter();
 const store = useStore();
@@ -40,6 +41,9 @@ onMounted(async () => {
 
 <template>
   <div class="weather-list" :class="{ 'mobile': isMobile }">
+    <div class="search-wrapper">
+      <SearchContainer />
+    </div>
     <template v-if="locations.length">
       <button class="remove-all-btn" @click.stop="removeAll" title="Remove all locations">
         🗑 Remove All
@@ -77,7 +81,7 @@ onMounted(async () => {
   gap: 1rem;
   padding: 1rem;
   min-height: 60vh;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
 }
@@ -137,5 +141,18 @@ onMounted(async () => {
 .remove-all-btn:hover {
   background: #6366f1;
   color: #fff;
+}
+
+.search-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 1rem;
+}
+
+.weather-list.mobile .search-wrapper {
+  padding: 0.75rem 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  max-width: 100%;
 }
 </style> 

@@ -4,7 +4,7 @@ import { computed, ref, onMounted, onUnmounted } from 'vue';
 import SplitLayout from './components/layouts/SplitLayout.vue';
 import MainLayout from './components/layouts/MainLayout.vue';
 import MobileLayout from './components/layouts/MobileLayout.vue';
-import Header from './components/layouts/Header.vue';
+import MobileBlankLayout from './components/layouts/MobileBlankLayout.vue';
 
 const route = useRoute();
 const windowWidth = ref(window.innerWidth);
@@ -25,6 +25,9 @@ const isMobile = computed(() => windowWidth.value <= 768);
 
 const currentLayout = computed(() => {
   if (isMobile.value) {
+    if (route.meta.mobileLayout === 'blank') {
+      return MobileBlankLayout;
+    }
     return MobileLayout;
   }
   return route.meta.layout === 'split' ? SplitLayout : MainLayout;
@@ -32,7 +35,6 @@ const currentLayout = computed(() => {
 </script>
 
 <template>
-  <Header />
   <component :is="currentLayout">
     <router-view v-slot="{ Component }">
       <component :is="Component" />

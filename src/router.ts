@@ -36,7 +36,8 @@ const routes: RouteRecordRaw[] = [
         },
         meta: { 
           layout: 'split',
-          mobileComponent: WeatherDetails // Show WeatherDetails on mobile
+          mobileComponent: WeatherDetails, // Show WeatherDetails on mobile
+          mobileLayout: 'blank'  // Use blank layout (without header) on mobile
         }
       },
       // SINGLE COMPONENT ROUTE (No split layout)

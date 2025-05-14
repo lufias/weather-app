@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import ContentCard from './ContentCard.vue';
+import Header from './Header.vue';
 // Layout component logic can be added here
 </script>
 
 <template>
   <div class="layout">    
+    <Header />
     <main class="main-content">
       <ContentCard>
         <router-view></router-view>

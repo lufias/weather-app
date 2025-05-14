@@ -89,12 +89,6 @@ async function handleSelect(val: SuggestionItem) {
 
 <style scoped>
 .search-container {
-  width: 300px;
-}
-
-@media (max-width: 768px) {
-  .search-container {
-    display: none;
-  }
+  width: 100%;
 }
 </style> 

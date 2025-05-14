@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
-import SearchContainer from '../SearchContainer.vue';
-
 </script>
 
 <template>
@@ -12,7 +10,6 @@ import SearchContainer from '../SearchContainer.vue';
         <span class="title">Weather</span>
       </router-link>
       <div class="header-actions">
-        <SearchContainer />
         <router-link :to="{ name: 'EditProfile' }" class="profile-icon profile-icon-desktop" aria-label="Edit Profile">
           <FontAwesomeIcon :icon="faUserRegular" size="lg" />
         </router-link>
@@ -47,7 +44,6 @@ import SearchContainer from '../SearchContainer.vue';
   display: flex;
   align-items: center;
   gap: 2rem;
-  flex: 1;
   justify-content: flex-end;
 }
 

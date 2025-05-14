@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
-import Header from './Header.vue';
 
 const route = useRoute();
 
@@ -21,17 +20,16 @@ const resolvedMobileComponent = computed(() => {
 </script>
 
 <template>
-  <div class="mobile-layout">
-    <Header />
+  <div class="mobile-blank-layout">
     <component :is="resolvedMobileComponent" />
   </div>
 </template>
 
 <style scoped>
-.mobile-layout {
+.mobile-blank-layout {
   width: 100%;
   min-height: 100vh;
-  background-color: var(- -background-color);
+  background-color: var(--background-color);
   padding-left: 1rem;
   padding-right: 1rem;
   padding-bottom: 2rem;
