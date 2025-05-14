@@ -15,6 +15,8 @@ import WeatherDetailsCard from './WeatherDetailsCard.vue';
 <style scoped>
 .weather-details-weekly {
   margin-top: 2rem;
+  margin-left: 16px;
+  margin-right: 16px;
 }
 .weekly-title {
   font-size: 1.15rem;

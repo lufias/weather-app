@@ -1,12 +1,3 @@
-<template>
-  <div class="weather-details-card" :class="type">
-    <div class="card-icon">🌦️</div>
-    <div class="card-temp">20°</div>
-    <div class="card-time">7:00 PM</div>
-    <div class="card-desc">Rain</div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { defineProps } from 'vue';
 const props = defineProps({
@@ -14,6 +5,14 @@ const props = defineProps({
 });
 // More props will be added later
 </script>
+
+<template>
+  <div class="weather-details-card" :class="type">
+    <div class="card-icon">🌦️</div>
+    <div class="card-temp">20°</div>
+    <div class="card-time">7:00 PM</div>    
+  </div>
+</template>
 
 <style scoped>
 .weather-details-card {
@@ -40,15 +39,14 @@ const props = defineProps({
   font-size: 2rem;
 }
 .card-temp {
-  font-size: 1.1rem;
+  font-size: 14px;
   font-weight: 600;
+  color: #201C1C;
 }
 .card-time {
-  font-size: 0.98rem;
-  color: #7c7c7c;
-}
-.card-desc {
-  font-size: 0.95rem;
-  color: #6366f1;
+  font-size: 12px;
+  font-weight: 400;  
+  color: #494343
+  
 }
 </style> 
