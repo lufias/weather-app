@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
 import WeatherList from './components/WeatherList.vue';
-import WeatherDetails from './pages/WeatherDetails.vue';
-import EditProfile from './pages/EditProfile.vue';
+import WeatherDetails from './pages/WeatherDetailsPage.vue';
+import EditProfile from './pages/EditProfilePage.vue';
 
 // ROUTE CONFIGURATION
 // -------------------

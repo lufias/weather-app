@@ -10,7 +10,7 @@ const store = useStore();
 const isMobile = computed(() => window.innerWidth <= 768);
 
 const locations = computed(() => [...store.getters['locations/getLocations']]);
-const getWeather = (id: number) => store.getters['weather/getWeatherByLocation'](id);
+const getWeather = (id: number) => store.getters['weather/getCurrentWeather'](id);
 
 function goToDetails(id: number) {
   if (isMobile.value) {
@@ -26,13 +26,15 @@ function removeAll() {
 
 onMounted(async () => {
   await store.dispatch('locations/loadLocations');
-  for (const location of locations.value) {
-    await store.dispatch('weather/fetchWeather', {
-      locationId: location.id,
-      lat: location.lat,
-      lon: location.lon
-    });
-  }
+  await Promise.all(
+    locations.value.map(location => 
+      store.dispatch('weather/fetchCurrentWeather', {
+        locationId: location.id,
+        lat: location.lat,
+        lon: location.lon
+      })
+    )
+  );
 });
 </script>
 
@@ -50,12 +52,12 @@ onMounted(async () => {
       >
         <WeatherCard
           :location="item.city"
-          :temperature="getWeather(item.id)?.current?.temp ?? 0"
-          :description="getWeather(item.id)?.current?.weather[0]?.description ?? 'Loading...'"
-          :high="getWeather(item.id)?.current?.temp ?? 0"
-          :low="getWeather(item.id)?.current?.temp ?? 0"
+          :temperature="getWeather(item.id)?.temp ?? 0"
+          :description="getWeather(item.id)?.weather[0]?.description ?? 'Loading...'"
+          :high="getWeather(item.id)?.temp ?? 0"
+          :low="getWeather(item.id)?.temp ?? 0"
           :isCurrentLocation="item.isCurrentLocation"
-          :weatherIcon="getWeather(item.id)?.current?.weather[0]?.icon"
+          :weatherIcon="getWeather(item.id)?.weather[0]?.icon"
         />
       </div>
     </template>
