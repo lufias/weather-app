@@ -1,7 +1,6 @@
 <template>
   <div class="weather-details">
-    <WeatherDetailsHeader />
-    <WeatherDetailsMeta />
+    <WeatherDetailsHeader />    
     <WeatherDetailsHourly />
     <WeatherDetailsWeekly />
   </div>
@@ -9,7 +8,6 @@
 
 <script setup lang="ts">
 import WeatherDetailsHeader from './WeatherDetailsHeader.vue';
-import WeatherDetailsMeta from './WeatherDetailsMeta.vue';
 import WeatherDetailsHourly from './WeatherDetailsHourly.vue';
 import WeatherDetailsWeekly from './WeatherDetailsWeekly.vue';
 </script>
@@ -25,7 +23,7 @@ import WeatherDetailsWeekly from './WeatherDetailsWeekly.vue';
   padding: 2.5rem 0;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  /* gap: 2.5rem; */
   padding-top: 0.8rem;
 }
 </style> 
