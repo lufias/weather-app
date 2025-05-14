@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import SearchBar from './SearchBar.vue';
-import { db } from '../db/locationDB';
+import store from '../store';
 
 interface CitySuggestion {
   name: string;
@@ -59,8 +59,7 @@ function handleUpdate(val: string) {
 
 async function handleSelect(val: SuggestionItem) {
   console.log('Selected city:', val);
-  await db.locations.clear(); // Only keep one location
-  await db.locations.add({
+  await store.dispatch('locations/addLocation', {
     city: val.city,
     state: val.state,
     country: val.country,
