@@ -16,7 +16,7 @@ import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
   text-align: center;  
   font-size: 14px;
   font-weight: 400;
-  margin-bottom: 0.5rem;
+  margin-bottom: 24px;
 }
 .meta-refresh {
   font-size: 1rem;

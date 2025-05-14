@@ -15,15 +15,11 @@ import WeatherDetailsWeekly from './WeatherDetailsWeekly.vue';
 <style scoped>
 .weather-details {
   width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
+  max-width: 480px;  
   background: #fff;
   border-radius: 1.2rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  padding: 2.5rem 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);  
   display: flex;
-  flex-direction: column;
-  /* gap: 2.5rem; */
-  padding-top: 0.8rem;
+  flex-direction: column;  
 }
 </style> 

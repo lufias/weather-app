@@ -29,9 +29,6 @@ const resolvedMobileComponent = computed(() => {
 .mobile-blank-layout {
   width: 100%;
   min-height: 100vh;
-  background-color: var(--background-color);
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 2rem;
+  background-color: var(--background-color);  
 }
 </style> 
