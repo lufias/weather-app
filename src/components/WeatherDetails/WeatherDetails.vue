@@ -26,5 +26,6 @@ import WeatherDetailsWeekly from './WeatherDetailsWeekly.vue';
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+  padding-top: 0.8rem;
 }
 </style> 
