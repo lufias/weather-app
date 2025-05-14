@@ -38,13 +38,22 @@ function handleSelect(val: string) {
 <script lang="ts" setup>
 import { ref, watch, onMounted, onBeforeUnmount, defineProps, defineEmits } from 'vue';
 
+interface SuggestionItem {
+  label: string;
+  city: string;
+  state?: string;
+  country: string;
+  lat: number;
+  lon: number;
+}
+
 const props = defineProps<{
-  suggestions: string[];
+  suggestions: SuggestionItem[];
   placeholder?: string;
 }>();
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void;
-  (e: 'select', value: string): void;
+  (e: 'select', value: SuggestionItem): void;
 }>();
 
 const inputValue = ref('');
@@ -59,8 +68,8 @@ function onInput() {
   }, 300);
 }
 
-function selectSuggestion(suggestion: string) {
-  inputValue.value = suggestion;
+function selectSuggestion(suggestion: SuggestionItem) {
+  inputValue.value = suggestion.label;
   emit('select', suggestion);
   showSuggestions.value = false;
 }
@@ -72,9 +81,11 @@ function clearInput() {
 }
 
 function handleClickOutside(event: MouseEvent) {
-  if (searchBarRef.value && !searchBarRef.value.contains(event.target as Node)) {
-    showSuggestions.value = false;
-  }
+  setTimeout(() => {
+    if (searchBarRef.value && !searchBarRef.value.contains(event.target as Node)) {
+      showSuggestions.value = false;
+    }
+  }, 120); // Delay to allow click event on suggestion to register
 }
 
 onMounted(() => {
@@ -86,6 +97,9 @@ onBeforeUnmount(() => {
 
 watch(() => props.suggestions, (newVal) => {
   if (!newVal.length) showSuggestions.value = false;
+  else if (document.activeElement === searchBarRef.value?.querySelector('input') && inputValue.value) {
+    showSuggestions.value = true;
+  }
 });
 </script>
 
@@ -95,7 +109,7 @@ watch(() => props.suggestions, (newVal) => {
       <input
         v-model="inputValue"
         @input="onInput"
-        @focus="showSuggestions = true"
+        @focus="showSuggestions = !!inputValue && !!props.suggestions.length"
         type="text"
         class="search-input"
         :placeholder="placeholder"
@@ -114,7 +128,9 @@ watch(() => props.suggestions, (newVal) => {
         class="suggestion-item"
         @click="selectSuggestion(suggestion)"
       >
-        {{ suggestion }}
+        <span class="city">{{ suggestion.city }}</span>
+        <span v-if="suggestion.state" class="state-country">, {{ suggestion.state }}, {{ suggestion.country }}</span>
+        <span v-else class="state-country">, {{ suggestion.country }}</span>
       </li>
     </ul>
   </div>
@@ -126,9 +142,9 @@ $input-bg: #f7f8fa;
 $input-border: #ccc;
 $input-radius: 0.6rem;
 $input-focus: #007aff;
-$icon-color: #8C939D;
+$search-color: #8C939D;
 $placeholder-color: rgba(0, 0, 0, 0.5);
-$clear-btn-size: 2.4rem;
+$clear-btn-size: 1.8rem;
 $suggestion-hover: #f5f5f5;
 $scrollbar-thumb: #d1d5db;
 $scrollbar-track: #f7f8fa;
@@ -146,12 +162,12 @@ $scrollbar-track: #f7f8fa;
 
 .search-input {
   width: 100%;
-  padding: 1rem 3.6rem 1rem 4rem;
+  padding: 0.6rem 2.6rem 0.6rem 3.6rem;
   font-family: 'SF Pro Display', Arial, sans-serif;
   font-weight: 400;
-  font-size: 1.6rem;
+  font-size: 16px;
   line-height: 1;
-  letter-spacing: 0.03em;
+  letter-spacing: 3%;
   color: #000;
   border: 1px solid $input-border;
   border-radius: $input-radius;
@@ -184,8 +200,8 @@ $scrollbar-track: #f7f8fa;
   pointer-events: none;
 
   .fa-search {
-    font-size: 1.8rem;
-    color: $icon-color;
+    font-size: 1.3rem;
+    color: $search-color;
   }
 }
 
@@ -193,9 +209,9 @@ $scrollbar-track: #f7f8fa;
   position: absolute;
   right: 0.8rem;
   background: none;
-  border: 0.2rem solid $icon-color;
-  font-size: 1.6rem;
-  color: $icon-color;
+  border: 0.1rem solid $search-color;
+  font-size: 1.1rem;
+  color: $search-color;
   cursor: pointer;
   padding: 0;
   line-height: 0;
@@ -251,12 +267,25 @@ $scrollbar-track: #f7f8fa;
 
 .suggestion-item {
   padding: 1.2rem 1.6rem;
-  font-size: 1.5rem;
+  font-family: 'SF Pro Display', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.5px;
   cursor: pointer;
   transition: background 0.2s;
+  color: #222;
 
   &:hover {
     background: $suggestion-hover;
+  }
+  .city {
+    font-weight: 500;
+  }
+  .state-country {
+    font-weight: 500;
+    color: #888;
+    margin-left: 2px;
   }
 }
 </style> 

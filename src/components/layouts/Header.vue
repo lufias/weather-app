@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
+import SearchContainer from '../SearchContainer.vue';
+
 </script>
 
 <template>
@@ -8,9 +10,12 @@ import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
     <router-link to="/" class="title-link">
       <span class="title">Weather</span>
     </router-link>
-    <router-link :to="{ name: 'EditProfile' }" class="profile-icon" aria-label="Edit Profile">
-      <FontAwesomeIcon :icon="faUserRegular" size="lg" />
-    </router-link>
+    <div class="header-right">
+      <SearchContainer />
+      <router-link :to="{ name: 'EditProfile' }" class="profile-icon" aria-label="Edit Profile">
+        <FontAwesomeIcon :icon="faUserRegular" size="lg" />
+      </router-link>
+    </div>
   </header>
 </template>
 
@@ -33,6 +38,12 @@ import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
   color: #111;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .profile-icon {
   display: flex;
   align-items: center;
@@ -43,5 +54,15 @@ import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
 .profile-icon:visited,
 .profile-icon:active {
   color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
 }
 </style> 
