@@ -20,6 +20,10 @@ function goToDetails(id: number) {
   }
 }
 
+function removeAll() {
+  store.dispatch('locations/removeAllLocations');
+}
+
 onMounted(async () => {
   await store.dispatch('locations/loadLocations');
   for (const location of locations.value) {
@@ -35,6 +39,9 @@ onMounted(async () => {
 <template>
   <div class="weather-list" :class="{ 'mobile': isMobile }">
     <template v-if="locations.length">
+      <button class="remove-all-btn" @click.stop="removeAll" title="Remove all locations">
+        🗑 Remove All
+      </button>
       <div
         v-for="item in locations"
         :key="item.id"
@@ -69,6 +76,7 @@ onMounted(async () => {
   min-height: 60vh;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .weather-list.mobile {
@@ -106,5 +114,26 @@ onMounted(async () => {
   font-size: 3.5rem;
   margin-bottom: 1.2rem;
   color: #d1d5db;
+}
+
+.remove-all-btn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: #fff;
+  color: #6366f1;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+  z-index: 2;
+  transition: background 0.15s, color 0.15s;
+}
+.remove-all-btn:hover {
+  background: #6366f1;
+  color: #fff;
 }
 </style> 

@@ -2,6 +2,7 @@ import type { Module } from 'vuex'
 import { db } from '../../db/locationDB'
 
 export interface Location {
+  id?: number;
   city: string
   state?: string
   country: string
@@ -30,6 +31,9 @@ const locations: Module<LocationsState, any> = {
     },
     SET_LOCATIONS(state, locations: Location[]) {
       state.locations = locations
+    },
+    REMOVE_ALL_LOCATIONS(state) {
+      state.locations = [];
     }
   },
 
@@ -47,6 +51,15 @@ const locations: Module<LocationsState, any> = {
       const updated = state.locations.filter((loc: any) => loc.id !== locationId);
       commit('SET_LOCATIONS', updated);
       await dispatch('weather/removeWeather', locationId, { root: true });
+    },
+    async removeAllLocations({ commit, state, dispatch }) {
+      await db.locations.clear();
+      for (const loc of state.locations) {
+        if (loc.id !== undefined) {
+          await dispatch('weather/removeWeather', loc.id, { root: true });
+        }
+      }
+      commit('REMOVE_ALL_LOCATIONS');
     }
   }
 }
