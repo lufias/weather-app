@@ -27,6 +27,11 @@ const props = defineProps({
   low: { type: Number, required: false },
   isCurrentLocation: { type: Boolean, default: false },
 });
+
+const capitalizeFirst = (str: string) => {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
 </script>
 
 <template>
@@ -42,7 +47,7 @@ const props = defineProps({
       <div class="weather-card__temp">{{ props.temperature }}<span class="weather-card__degree">°</span></div>
     </div>
     <div class="weather-card__desc-footer-row">
-      <div class="weather-card__desc">{{ props.description }}</div>
+      <div class="weather-card__desc">{{ capitalizeFirst(props.description) }}</div>
       <div class="weather-card__footer">
         <span v-if="props.high !== undefined && props.low !== undefined">
           H:{{ props.high }}°  L:{{ props.low }}°
@@ -62,6 +67,10 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .weather-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  box-sizing: border-box;
   background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
   color: #fff;
   border-radius: 1.2rem;

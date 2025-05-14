@@ -1,23 +1,16 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 import WeatherCard from './WeatherCard.vue';
 
 const router = useRouter();
+const store = useStore();
 
 const isMobile = computed(() => window.innerWidth <= 768);
 
-interface WeatherItem {
-  id: number;
-  city: string;
-  temp: number;
-  desc: string;
-  high: number;
-  low: number;
-  isCurrentLocation: boolean;
-}
-
-const weatherList = ref<WeatherItem[]>([]);
+const locations = computed(() => store.getters['locations/getLocations']);
+const getWeather = (id: number) => store.getters['weather/getWeatherByLocation'](id);
 
 function goToDetails(id: number) {
   if (isMobile.value) {
@@ -26,23 +19,34 @@ function goToDetails(id: number) {
     router.push({ name: 'WeatherDetails', params: { id } });
   }
 }
+
+onMounted(async () => {
+  await store.dispatch('locations/loadLocations');
+  for (const location of locations.value) {
+    await store.dispatch('weather/fetchWeather', {
+      locationId: location.id,
+      lat: location.lat,
+      lon: location.lon
+    });
+  }
+});
 </script>
 
 <template>
   <div class="weather-list" :class="{ 'mobile': isMobile }">
-    <template v-if="weatherList.length">
+    <template v-if="locations.length">
       <div
-        v-for="item in weatherList"
+        v-for="item in locations"
         :key="item.id"
         class="weather-list-item"
         @click="goToDetails(item.id)"
       >
         <WeatherCard
           :location="item.city"
-          :temperature="item.temp"
-          :description="item.desc"
-          :high="item.high"
-          :low="item.low"
+          :temperature="getWeather(item.id)?.current?.temp ?? 0"
+          :description="getWeather(item.id)?.current?.weather[0]?.description ?? 'Loading...'"
+          :high="getWeather(item.id)?.current?.temp ?? 0"
+          :low="getWeather(item.id)?.current?.temp ?? 0"
           :isCurrentLocation="item.isCurrentLocation"
         />
       </div>
@@ -78,6 +82,10 @@ function goToDetails(id: number) {
 }
 
 .weather-list-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
   cursor: pointer;
 }
 

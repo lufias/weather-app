@@ -41,6 +41,12 @@ const locations: Module<LocationsState, any> = {
     async loadLocations({ commit }) {
       const locations = await db.locations.toArray()
       commit('SET_LOCATIONS', locations)
+    },
+    async deleteLocation({ commit, state, dispatch }, locationId) {
+      await db.locations.delete(locationId);
+      const updated = state.locations.filter((loc: any) => loc.id !== locationId);
+      commit('SET_LOCATIONS', updated);
+      await dispatch('weather/removeWeather', locationId, { root: true });
     }
   }
 }
