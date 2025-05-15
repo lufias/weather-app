@@ -1,40 +1,3 @@
-
-<!-- Example Usage -->
- 
-<!-- <script setup lang="ts">
-import { ref } from 'vue';
-import SearchBar from './SearchBar.vue';
-
-const suggestions = ref([
-  'Milan, Italy',
-  'Milan, TN United States',
-  'Milan, MI United States',
-  'Milan, OH United States',
-  'Milan, IL United States',
-]);
-
-const searchValue = ref('');
-const selected = ref('');
-
-function handleUpdate(val: string) {
-  searchValue.value = val;
-}
-
-function handleSelect(val: string) {
-  selected.value = val;
-}
-</script> -->
-
-<!-- <SearchBar
-    :suggestions="searchValue ? suggestions.filter((s: string) => s.toLowerCase().includes(searchValue.toLowerCase())) : []"
-    placeholder="Search city..."
-    @update:modelValue="handleUpdate"
-    @select="handleSelect"
-/>
-<div v-if="selected" style="margin-top: 2rem; font-size: 1.4rem; color: #333;">
-    Selected: <strong>{{ selected }}</strong>
-</div> -->
-
 <script lang="ts" setup>
 import { ref, watch, onMounted, onBeforeUnmount, defineProps, defineEmits } from 'vue';
 
@@ -69,8 +32,9 @@ function onInput() {
 }
 
 function selectSuggestion(suggestion: SuggestionItem) {
-  inputValue.value = suggestion.label;
   emit('select', suggestion);
+  inputValue.value = '';
+  emit('update:modelValue', '');
   showSuggestions.value = false;
 }
 

@@ -1,4 +1,5 @@
 import type { Module } from 'vuex';
+import { API_KEY, API_ENDPOINTS, DEFAULT_UNITS } from '../../config/api';
 
 interface WeatherCondition {
   id: number;
@@ -115,15 +116,13 @@ const weather: Module<WeatherState, any> = {
   },
   actions: {
     async fetchCurrentWeather({ commit }, { locationId, lat, lon }) {
-      const API_KEY = 'a8bcd4ef1794d3d95d4ec15f5f5a15dc';
-      const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${API_KEY}&units=metric`;
+      const url = `${API_ENDPOINTS.oneCall}?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${API_KEY}&units=${DEFAULT_UNITS}`;
       const res = await fetch(url);
       const data = await res.json();
       commit('SET_CURRENT_WEATHER', { locationId, weather: data.current });
     },
     async fetchWeatherDetails({ commit }, { locationId, lat, lon }) {
-      const API_KEY = 'a8bcd4ef1794d3d95d4ec15f5f5a15dc';
-      const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${API_KEY}&units=metric`;
+      const url = `${API_ENDPOINTS.oneCall}?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${API_KEY}&units=${DEFAULT_UNITS}`;
       const res = await fetch(url);
       const data = await res.json();
       commit('SET_WEATHER_DETAILS', { 

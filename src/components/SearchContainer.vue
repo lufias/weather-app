@@ -4,6 +4,7 @@ import SearchBar from './SearchBar.vue';
 import store from '../store';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import { API_KEY, API_ENDPOINTS } from '../config/api';
 
 interface CitySuggestion {
   name: string;
@@ -24,7 +25,6 @@ interface SuggestionItem {
 
 const suggestions = ref<SuggestionItem[]>([]);
 const searchValue = ref('');
-const API_KEY = 'a8bcd4ef1794d3d95d4ec15f5f5a15dc';
 
 async function fetchCitySuggestions(query: string) {
   if (!query.trim()) {
@@ -34,7 +34,7 @@ async function fetchCitySuggestions(query: string) {
 
   try {
     const response = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(query)}&limit=5&appid=${API_KEY}`
+      `${API_ENDPOINTS.geocoding}?q=${encodeURIComponent(query)}&limit=5&appid=${API_KEY}`
     );
     const data = await response.json();
     suggestions.value = data.map((city: CitySuggestion) => {
