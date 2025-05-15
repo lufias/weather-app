@@ -7,7 +7,7 @@ interface WeatherCondition {
   icon: string;
 }
 
-interface CurrentWeather {
+export interface CurrentWeather {
   dt: number;
   sunrise: number;
   sunset: number;

@@ -1,15 +1,81 @@
 <template>
   <div class="weather-details">
-    <WeatherDetailsHeader />    
+    <WeatherDetailsHeader 
+      v-if="currentWeather && currentLocation"
+      :current-weather="currentWeather"
+      :location="currentLocation"
+    />    
     <WeatherDetailsHourly />
     <WeatherDetailsWeekly />
   </div>
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { watch, ref, computed } from 'vue';
+import type { Location } from '../../store/modules/locations';
+import type { CurrentWeather } from '../../store/modules/weather';
 import WeatherDetailsHeader from './WeatherDetailsHeader.vue';
 import WeatherDetailsHourly from './WeatherDetailsHourly.vue';
 import WeatherDetailsWeekly from './WeatherDetailsWeekly.vue';
+
+const route = useRoute();
+const store = useStore();
+
+const currentWeather = ref<CurrentWeather | null>(null);
+const currentLocation = ref<Location | null>(null);
+
+const locations = computed(() => store.getters['locations/getLocations']);
+
+// Watch for changes in route params and locations
+watch(
+  [() => route.params.id, locations],
+  async ([newId, locationsValue]) => {
+    if (newId && locationsValue.length > 0) {
+      const locationId = parseInt(newId as string);
+      // Get location info from store
+      const location = locationsValue.find((loc: Location) => loc.id === locationId);
+      if (location) {
+        currentLocation.value = location;
+        // Check if we already have current weather data
+        const existingCurrentWeather = store.getters['weather/getCurrentWeather'](locationId);        
+        // Prepare fetch promises array
+        const fetchPromises = [];
+        // Only fetch current weather if we don't have it or if it's older than 30 minutes
+        if (!existingCurrentWeather || 
+            (Date.now() / 1000 - existingCurrentWeather.dt > 1800)) {
+          fetchPromises.push(
+            store.dispatch('weather/fetchCurrentWeather', {
+              locationId,
+              lat: location.lat,
+              lon: location.lon
+            })
+          );
+        } else {
+          currentWeather.value = existingCurrentWeather;
+        }
+        // Always fetch weather details as they contain hourly and daily forecasts
+        fetchPromises.push(
+          store.dispatch('weather/fetchWeatherDetails', {
+            locationId,
+            lat: location.lat,
+            lon: location.lon
+          })
+        );
+        // Execute any necessary fetches
+        if (fetchPromises.length > 0) {
+          await Promise.all(fetchPromises);
+          // Update current weather ref if we fetched new data
+          if (!currentWeather.value) {
+            currentWeather.value = store.getters['weather/getCurrentWeather'](locationId);
+          }
+        }
+      }
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped>
