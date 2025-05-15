@@ -80,7 +80,7 @@ async function handleSelect(val: SuggestionItem) {
   <div class="search-container">
     <SearchBar
       :suggestions="suggestions"
-      placeholder="Search city..."
+      placeholder="Search for a city or airport"
       @update:modelValue="handleUpdate"
       @select="handleSelect"
     />
