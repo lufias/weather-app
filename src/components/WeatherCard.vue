@@ -28,6 +28,7 @@ const props = defineProps({
   low: { type: Number, required: false },
   isCurrentLocation: { type: Boolean, default: false },
   weatherIcon: { type: String, required: false },
+  time: { type: String, required: false },
 });
 
 const capitalizeFirst = (str: string) => {
@@ -51,7 +52,7 @@ const cardStyle = computed(() => {
           <span v-if="props.isCurrentLocation">My Location</span>
           <span v-else>{{ props.location }}</span>
         </div>
-        <div class="weather-card__sub">{{ props.location }}</div>
+        <div class="weather-card__time" v-if="props.time">{{ props.time }}</div>
       </div>
       <div class="weather-card__temp">{{ props.temperature }}<span class="weather-card__degree">°</span></div>
     </div>
@@ -59,7 +60,7 @@ const cardStyle = computed(() => {
       <div class="weather-card__desc">{{ capitalizeFirst(props.description) }}</div>
       <div class="weather-card__footer">
         <span v-if="props.high !== undefined && props.low !== undefined">
-          H:{{ props.high }}°  L:{{ props.low }}°
+          H:{{ props.high }}°&nbsp;&nbsp;&nbsp;L:{{ props.low }}°
         </span>
       </div>
     </div>
@@ -97,6 +98,13 @@ const cardStyle = computed(() => {
     &.main {
       font-size: 1.3rem;
     }
+  }
+
+  &__time {
+    font-size: 1rem;
+    opacity: 0.85;
+    font-weight: 400;
+    margin-bottom: 0.1rem;
   }
 
   &__sub {

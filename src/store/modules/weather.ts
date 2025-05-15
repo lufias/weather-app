@@ -100,7 +100,10 @@ const weather: Module<WeatherState, any> = {
   },
   mutations: {
     SET_CURRENT_WEATHER(state, { locationId, weather }) {
-      state.currentWeather[locationId] = weather;
+      state.currentWeather = {
+        ...state.currentWeather,
+        [locationId]: { ...weather }
+      };
     },
     SET_WEATHER_DETAILS(state, { locationId, details }) {
       state.weatherDetails[locationId] = details;

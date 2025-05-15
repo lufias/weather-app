@@ -77,7 +77,9 @@ const weatherIcon = computed(() => {
     </template>
     <template v-else>
       <div class="card-icon">
-        <img :src="weatherIcon" :alt="props.data.weather[0].description" />
+        <div class="icon-circle-hourly">
+          <img :src="weatherIcon" :alt="props.data.weather[0].description" />
+        </div>
       </div>
       <div class="card-temp">{{ hourlyTemp }}°</div>
       <div class="card-time">{{ formattedTime }}</div>
@@ -174,5 +176,18 @@ const weatherIcon = computed(() => {
   font-size: 12px;
   font-weight: 400;
   color: #494343;
+}
+.icon-circle-hourly {
+  background: #e0e7ef;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-circle-hourly img {
+  width: 32px;
+  height: 32px;
 }
 </style> 

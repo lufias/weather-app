@@ -12,17 +12,20 @@ export interface Location {
 
 export interface LocationsState {
   locations: Location[]
+  selectedLocationId: number | null
 }
 
 const locations: Module<LocationsState, any> = {
   namespaced: true,
   
   state: {
-    locations: []
+    locations: [],
+    selectedLocationId: null
   },
 
   getters: {
-    getLocations: (state) => state.locations
+    getLocations: (state) => state.locations,
+    getSelectedLocationId: (state) => state.selectedLocationId
   },
 
   mutations: {
@@ -34,6 +37,9 @@ const locations: Module<LocationsState, any> = {
     },
     REMOVE_ALL_LOCATIONS(state) {
       state.locations = [];
+    },
+    SET_SELECTED_LOCATION_ID(state, locationId: number | null) {
+      state.selectedLocationId = locationId;
     }
   },
 
@@ -71,6 +77,10 @@ const locations: Module<LocationsState, any> = {
         }
       }
       commit('REMOVE_ALL_LOCATIONS');
+      commit('SET_SELECTED_LOCATION_ID', null);
+    },
+    setSelectedLocationId({ commit }, locationId: number | null) {
+      commit('SET_SELECTED_LOCATION_ID', locationId);
     }
   }
 }

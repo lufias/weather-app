@@ -58,6 +58,7 @@ onMounted(async () => {
           :low="getWeather(item.id)?.temp ?? 0"
           :isCurrentLocation="item.isCurrentLocation"
           :weatherIcon="getWeather(item.id)?.weather[0]?.icon"
+          :time="getWeather(item.id)?.dt ? new Date(getWeather(item.id).dt * 1000).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) : ''"
         />
       </div>
     </template>
