@@ -1,29 +1,50 @@
 <template>
-  <form class="profile-form">
+  <form class="profile-form" @submit.prevent="handleSubmit">
     <div class="form-group">
       <label>Full name</label>
-      <input type="text" :value="user.name" class="form-input" :disabled="disabled" />
+      <input 
+        type="text" 
+        v-model="formData.name" 
+        class="form-input" 
+        :disabled="disabled" 
+      />
     </div>
     <div class="form-group">
       <label>Email</label>
-      <input type="email" :value="user.email" class="form-input" :disabled="disabled" />
+      <input 
+        type="email" 
+        v-model="formData.email" 
+        class="form-input" 
+        :disabled="disabled" 
+      />
     </div>
     <div class="form-group">
       <label>Phone Number</label>
       <div class="phone-input-wrapper">
         <img class="flag" src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/svg/1f1f2-1f1fe.svg" alt="Malaysian flag" />
         <span class="country-code">+60</span>
-        <input type="text" :value="user.phone" class="form-input phone-input" :disabled="disabled" />
+        <input 
+          type="text" 
+          v-model="formData.phone" 
+          class="form-input phone-input" 
+          :disabled="disabled" 
+        />
       </div>
     </div>
   </form>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, ref, watch } from 'vue';
+import { useStore } from 'vuex';
+import type { UserProfile } from '../../store/modules/user';
+
+const store = useStore();
+const emit = defineEmits(['submit']);
+
 const props = defineProps({
   user: {
-    type: Object,
+    type: Object as () => UserProfile,
     required: true,
     default: () => ({ name: '', email: '', phone: '' })
   },
@@ -32,6 +53,33 @@ const props = defineProps({
     default: true
   }
 });
+
+const formData = ref<UserProfile>({
+  name: props.user.name,
+  email: props.user.email,
+  phone: props.user.phone,
+  avatar: props.user.avatar
+});
+
+watch(() => props.user, (newUser) => {
+  formData.value = {
+    name: newUser.name,
+    email: newUser.email,
+    phone: newUser.phone,
+    avatar: newUser.avatar
+  };
+}, { deep: true });
+
+async function handleSubmit() {
+  if (props.disabled) return;
+  
+  try {
+    await store.dispatch('user/updateProfile', formData.value);
+    emit('submit');
+  } catch (error) {
+    console.error('Error updating profile:', error);
+  }
+}
 </script>
 
 <style scoped>
@@ -58,6 +106,11 @@ const props = defineProps({
 }
 .form-input:focus {
   border: 1.5px solid #232c47;
+}
+.form-input:disabled {
+  background: #f7f8fa;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 .phone-input-wrapper {
   display: flex;
