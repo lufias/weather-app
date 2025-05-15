@@ -1,13 +1,31 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 import WeatherDetailsCard from './WeatherDetailsCard.vue';
-// Props and logic will be added later
+import type { HourlyForecast } from '../../store/modules/weather';
+
+const route = useRoute();
+const store = useStore();
+
+const hourlyForecast = computed<HourlyForecast[]>(() => {
+  const locationId = parseInt(route.params.id as string);
+  const forecast = store.getters['weather/getHourlyForecast'](locationId);
+  // Return next 24 hours of forecast
+  return forecast?.slice(0, 24) || [];
+});
 </script>
 
 <template>
   <div class="weather-details-hourly">
     <div class="hourly-title">Hourly Forecast</div>
     <div class="hourly-list">
-      <WeatherDetailsCard v-for="h in 4" :key="h" :type="'hourly'" />
+      <WeatherDetailsCard 
+        v-for="hour in hourlyForecast.slice(0, 4)" 
+        :key="hour.dt"
+        :type="'hourly'"
+        :data="hour"
+      />
     </div>
   </div>
 </template>

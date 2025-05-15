@@ -25,7 +25,7 @@ export interface CurrentWeather {
   weather: WeatherCondition[];
 }
 
-interface HourlyForecast {
+export interface HourlyForecast {
   dt: number;
   temp: number;
   feels_like: number;
@@ -43,7 +43,7 @@ interface HourlyForecast {
   rain?: { '1h': number };
 }
 
-interface DailyForecast {
+export interface DailyForecast {
   dt: number;
   sunrise: number;
   sunset: number;
