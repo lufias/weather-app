@@ -1,10 +1,10 @@
 <template>
-  <div class="edit-profile-container">
+  <div class="edit-profile-container" data-testid="edit-profile-container">
     <div class="title-container">
-      <button class="back-btn" @click="handleBack">
+      <button class="back-btn" data-testid="back-button" @click="handleBack">
         <span>&lt;</span>
       </button>
-      <h2 class="title">Edit Profile</h2>
+      <h2 class="title" data-testid="profile-title">Edit Profile</h2>
     </div>
     <div class="half-circle-bg"></div>
     <ProfileAvatar 
@@ -17,7 +17,7 @@
       :disabled="!isEditMode" 
       @submit="handleSubmit"
     />
-    <button class="action-btn" @click="toggleEditMode">
+    <button class="action-btn" data-testid="action-button" @click="toggleEditMode">
       {{ isEditMode ? 'SUBMIT' : 'EDIT' }}
     </button>
   </div>

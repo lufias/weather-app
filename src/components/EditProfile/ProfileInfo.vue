@@ -1,7 +1,7 @@
 <template>
-  <div class="profile-info">
-    <div class="profile-name">{{ user.name }}</div>
-    <div class="profile-contact">{{ user.email }} | {{ user.phone }}</div>
+  <div class="profile-info" data-testid="profile-info">
+    <div class="profile-name" data-testid="profile-name">{{ user.name }}</div>
+    <div class="profile-contact" data-testid="profile-contact">{{ user.email }} | {{ user.phone }}</div>
   </div>
 </template>
 

@@ -15,7 +15,7 @@ describe('ProfileAvatar', () => {
 
   it('renders with default avatar when no avatar prop is provided', () => {
     const wrapper = mount(ProfileAvatar)
-    const img = wrapper.find('img')
+    const img = wrapper.find('[data-testid="avatar-image"]')
     expect(img.exists()).toBe(true)
     expect(img.attributes('src')).toBe(defaultAvatarImg)
   })
@@ -33,8 +33,8 @@ describe('ProfileAvatar', () => {
 
   it('does not show edit button and file input when not editable', () => {
     const wrapper = mount(ProfileAvatar)
-    expect(wrapper.find('.edit-icon').exists()).toBe(false)
-    expect(wrapper.find('input[type="file"]').exists()).toBe(false)
+    expect(wrapper.find('[data-testid="edit-avatar-button"]').exists()).toBe(false)
+    expect(wrapper.find('[data-testid="avatar-input"]').exists()).toBe(false)
   })
 
   it('shows edit button and file input when editable', () => {
@@ -43,8 +43,8 @@ describe('ProfileAvatar', () => {
         editable: true
       }
     })
-    expect(wrapper.find('.edit-icon').exists()).toBe(true)
-    expect(wrapper.find('input[type="file"]').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="edit-avatar-button"]').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="avatar-input"]').exists()).toBe(true)
   })
 
   it('triggers file input when edit button is clicked', async () => {
@@ -54,10 +54,10 @@ describe('ProfileAvatar', () => {
       }
     })
     
-    const fileInput = wrapper.find('input[type="file"]').element as HTMLInputElement
+    const fileInput = wrapper.find('[data-testid="avatar-input"]').element as HTMLInputElement
     const clickSpy = vi.spyOn(fileInput, 'click')
     
-    await wrapper.find('.edit-icon').trigger('click')
+    await wrapper.find('[data-testid="edit-avatar-button"]').trigger('click')
     expect(clickSpy).toHaveBeenCalled()
   })
 

@@ -1,11 +1,12 @@
 <template>
-  <form class="profile-form" @submit.prevent="handleSubmit">
+  <form class="profile-form" data-testid="profile-form" @submit.prevent="handleSubmit">
     <div class="form-group">
       <label>Full name</label>
       <input 
         type="text" 
         v-model="formData.name" 
         class="form-input" 
+        data-testid="name-input"
         :disabled="disabled" 
       />
     </div>
@@ -15,6 +16,7 @@
         type="email" 
         v-model="formData.email" 
         class="form-input" 
+        data-testid="email-input"
         :disabled="disabled" 
       />
     </div>
@@ -27,6 +29,7 @@
           type="text" 
           v-model="formData.phone" 
           class="form-input phone-input" 
+          data-testid="phone-input"
           :disabled="disabled" 
         />
       </div>

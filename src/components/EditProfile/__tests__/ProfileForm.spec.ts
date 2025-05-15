@@ -54,14 +54,14 @@ describe('ProfileForm', () => {
     })
 
     // Check if all form fields are rendered
-    expect(wrapper.find('input[type="text"]').exists()).toBe(true)
-    expect(wrapper.find('input[type="email"]').exists()).toBe(true)
-    expect(wrapper.find('.phone-input').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="name-input"]').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="email-input"]').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="phone-input"]').exists()).toBe(true)
 
     // Check if values are correctly populated
-    const nameInput = wrapper.find('input[type="text"]').element as HTMLInputElement
-    const emailInput = wrapper.find('input[type="email"]').element as HTMLInputElement
-    const phoneInput = wrapper.find('.phone-input').element as HTMLInputElement
+    const nameInput = wrapper.find('[data-testid="name-input"]').element as HTMLInputElement
+    const emailInput = wrapper.find('[data-testid="email-input"]').element as HTMLInputElement
+    const phoneInput = wrapper.find('[data-testid="phone-input"]').element as HTMLInputElement
 
     expect(nameInput.value).toBe(mockUser.name)
     expect(emailInput.value).toBe(mockUser.email)
@@ -120,8 +120,8 @@ describe('ProfileForm', () => {
 
     await wrapper.setProps({ user: updatedUser })
 
-    const nameInput = wrapper.find('input[type="text"]').element as HTMLInputElement
-    const emailInput = wrapper.find('input[type="email"]').element as HTMLInputElement
+    const nameInput = wrapper.find('[data-testid="name-input"]').element as HTMLInputElement
+    const emailInput = wrapper.find('[data-testid="email-input"]').element as HTMLInputElement
 
     expect(nameInput.value).toBe(updatedUser.name)
     expect(emailInput.value).toBe(updatedUser.email)
@@ -149,24 +149,29 @@ describe('ProfileForm', () => {
     })
 
     // Modify form data
-    const nameInput = wrapper.find('input[type="text"]')
+    const nameInput = wrapper.find('[data-testid="name-input"]')
     await nameInput.setValue('Jane Doe')
+    const emailInput = wrapper.find('[data-testid="email-input"]')
+    await emailInput.setValue('jane@example.com')
+    const phoneInput = wrapper.find('[data-testid="phone-input"]')
+    await phoneInput.setValue('987654321')
 
     // Submit form
-    const submitPromise = wrapper.find('form').trigger('submit')
+    await wrapper.find('[data-testid="profile-form"]').trigger('submit')
     
     // Resolve the store action
     resolveFn!()
     
     // Wait for all promises to resolve
-    await submitPromise
     await vi.runAllTimersAsync()
 
     // Check if store action was called with updated data
     expect(updateProfileMock).toHaveBeenCalledTimes(1)
     expect(updateProfileMock.mock.calls[0][1]).toEqual({
       ...mockUser,
-      name: 'Jane Doe'
+      name: 'Jane Doe',
+      email: 'jane@example.com',
+      phone: '987654321'
     })
 
     // Check if submit event was emitted
@@ -188,7 +193,7 @@ describe('ProfileForm', () => {
     })
 
     // Try to submit form
-    await wrapper.find('form').trigger('submit')
+    await wrapper.find('[data-testid="profile-form"]').trigger('submit')
 
     // Check that no action was called and no event was emitted
     expect(updateProfileSpy).not.toHaveBeenCalled()
@@ -218,13 +223,12 @@ describe('ProfileForm', () => {
     })
 
     // Submit form
-    const submitPromise = wrapper.find('form').trigger('submit')
+    await wrapper.find('[data-testid="profile-form"]').trigger('submit')
     
     // Reject the promise
     rejectFn!(error)
     
     // Wait for the rejection to be handled
-    await submitPromise.catch(() => {})
     await vi.runAllTimersAsync()
 
     // Check if error was logged
@@ -254,9 +258,9 @@ describe('ProfileForm', () => {
       phone: '987654321'
     }
 
-    await wrapper.find('input[type="text"]').setValue(updates.name)
-    await wrapper.find('input[type="email"]').setValue(updates.email)
-    await wrapper.find('.phone-input').setValue(updates.phone)
+    await wrapper.find('[data-testid="name-input"]').setValue(updates.name)
+    await wrapper.find('[data-testid="email-input"]').setValue(updates.email)
+    await wrapper.find('[data-testid="phone-input"]').setValue(updates.phone)
 
     // Check if v-model updated the internal state
     const formData = (wrapper.vm as any).formData

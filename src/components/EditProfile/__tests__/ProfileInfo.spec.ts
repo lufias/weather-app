@@ -17,12 +17,12 @@ describe('ProfileInfo', () => {
     })
 
     // Check if name is rendered
-    const nameElement = wrapper.find('.profile-name')
+    const nameElement = wrapper.find('[data-testid="profile-name"]')
     expect(nameElement.exists()).toBe(true)
     expect(nameElement.text()).toBe(mockUser.name)
 
     // Check if contact info is rendered
-    const contactElement = wrapper.find('.profile-contact')
+    const contactElement = wrapper.find('[data-testid="profile-contact"]')
     expect(contactElement.exists()).toBe(true)
     expect(contactElement.text()).toBe(`${mockUser.email} | ${mockUser.phone}`)
   })
@@ -35,12 +35,12 @@ describe('ProfileInfo', () => {
     })
 
     // Check if empty name is rendered
-    const nameElement = wrapper.find('.profile-name')
+    const nameElement = wrapper.find('[data-testid="profile-name"]')
     expect(nameElement.exists()).toBe(true)
     expect(nameElement.text()).toBe('')
 
     // Check if empty contact info is rendered
-    const contactElement = wrapper.find('.profile-contact')
+    const contactElement = wrapper.find('[data-testid="profile-contact"]')
     expect(contactElement.exists()).toBe(true)
     expect(contactElement.text()).toBe('|')
   })
@@ -61,11 +61,11 @@ describe('ProfileInfo', () => {
     await wrapper.setProps({ user: updatedUser })
 
     // Check if name is updated
-    const nameElement = wrapper.find('.profile-name')
+    const nameElement = wrapper.find('[data-testid="profile-name"]')
     expect(nameElement.text()).toBe(updatedUser.name)
 
     // Check if contact info is updated
-    const contactElement = wrapper.find('.profile-contact')
+    const contactElement = wrapper.find('[data-testid="profile-contact"]')
     expect(contactElement.text()).toBe(`${updatedUser.email} | ${updatedUser.phone}`)
   })
 }) 

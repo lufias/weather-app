@@ -66,17 +66,18 @@ function convertToBase64(file: File): Promise<string> {
 </script>
 
 <template>
-  <div class="avatar-wrapper">
-    <img :src="displayAvatar" class="avatar-img" alt="Profile avatar" />
+  <div class="avatar-wrapper" data-testid="avatar-wrapper">
+    <img :src="displayAvatar" class="avatar-img" data-testid="avatar-image" alt="Profile avatar" />
     <input 
       v-if="editable"
       type="file"
       accept="image/*"
       class="file-input"
+      data-testid="avatar-input"
       ref="fileInput"
       @change="handleFileChange"
     />
-    <button v-if="editable" class="edit-icon" @click="triggerFileInput">
+    <button v-if="editable" class="edit-icon" data-testid="edit-avatar-button" @click="triggerFileInput">
       <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="12" fill="#fff"/>
         <path d="M16.5 7.5l-1-1a1.414 1.414 0 0 0-2 0l-6 6V16h3.5l6-6a1.414 1.414 0 0 0 0-2z" stroke="#232c47" stroke-width="1.5"/>

@@ -83,8 +83,8 @@ describe('EditProfile', () => {
     })
     
     expect(wrapper.exists()).toBe(true)
-    expect(wrapper.find('.title').text()).toBe('Edit Profile')
-    expect(wrapper.find('.action-btn').text()).toBe('EDIT')
+    expect(wrapper.find('[data-testid="profile-title"]').text()).toBe('Edit Profile')
+    expect(wrapper.find('[data-testid="action-button"]').text()).toBe('EDIT')
   })
 
   it('loads profile data on mount', async () => {
@@ -124,7 +124,7 @@ describe('EditProfile', () => {
       }
     })
 
-    const button = wrapper.find('.action-btn')
+    const button = wrapper.find('[data-testid="action-button"]')
     expect(button.text()).toBe('EDIT')
 
     await button.trigger('click')
@@ -155,7 +155,7 @@ describe('EditProfile', () => {
     })
 
     // Enter edit mode
-    await wrapper.find('.action-btn').trigger('click')
+    await wrapper.find('[data-testid="action-button"]').trigger('click')
 
     // Simulate avatar update
     const avatar = wrapper.findComponent({ name: 'ProfileAvatar' })
@@ -205,15 +205,15 @@ describe('EditProfile', () => {
     })
 
     // Enter edit mode
-    await wrapper.find('.action-btn').trigger('click')
-    expect(wrapper.find('.action-btn').text()).toBe('SUBMIT')
+    await wrapper.find('[data-testid="action-button"]').trigger('click')
+    expect(wrapper.find('[data-testid="action-button"]').text()).toBe('SUBMIT')
 
     // Simulate form submission
     const form = wrapper.findComponent({ name: 'ProfileForm' })
     await form.vm.$emit('submit')
 
     // Check that edit mode is turned off
-    expect(wrapper.find('.action-btn').text()).toBe('EDIT')
+    expect(wrapper.find('[data-testid="action-button"]').text()).toBe('EDIT')
   })
 
   it('handles back navigation', async () => {
@@ -232,7 +232,7 @@ describe('EditProfile', () => {
       }
     })
 
-    const backButton = wrapper.find('.back-btn')
+    const backButton = wrapper.find('[data-testid="back-button"]')
     await backButton.trigger('click')
 
     expect(router.back).toHaveBeenCalled()
