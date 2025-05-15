@@ -1,12 +1,12 @@
 <template>
-  <div class="split-layout-container">
+  <div class="split-layout-container" data-testid="split-layout">
     <Header />
-    <div class="split-layout">
-      <div class="split-layout__left">
-        <router-view name="left" />
+    <div class="split-layout" data-testid="split-layout-content">
+      <div class="split-layout__left" data-testid="split-layout-left">
+        <router-view name="left" data-testid="router-view-left" />
       </div>
-      <div class="split-layout__right">
-        <router-view name="right" />
+      <div class="split-layout__right" data-testid="split-layout-right">
+        <router-view name="right" data-testid="router-view-right" />
       </div>
     </div>
   </div>

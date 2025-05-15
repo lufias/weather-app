@@ -5,11 +5,11 @@ import Header from './Header.vue';
 </script>
 
 <template>
-  <div class="layout">    
+  <div class="layout" data-testid="main-layout">    
     <Header />
-    <main class="main-content">
+    <main class="main-content" data-testid="main-content">
       <ContentCard>
-        <router-view></router-view>
+        <router-view data-testid="main-router-view"></router-view>
       </ContentCard>
     </main>
   </div>

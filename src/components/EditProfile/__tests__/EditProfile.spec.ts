@@ -47,7 +47,13 @@ const createMockRouter = () => {
     history: createWebHistory(),
     routes: [
       {
+        path: '/',
+        name: 'Home',
+        component: {}
+      },
+      {
         path: '/edit-profile',
+        name: 'EditProfile',
         component: EditProfile
       }
     ]
@@ -60,11 +66,15 @@ const createMockRouter = () => {
 }
 
 describe('EditProfile', () => {
-  it('renders properly with initial state', () => {
+  it('renders properly with initial state', async () => {
     const store = createMockStore()
+    const router = createMockRouter()
+    await router.push('/edit-profile')
+    await router.isReady()
+    
     const wrapper = mount(EditProfile, {
       global: {
-        plugins: [store],
+        plugins: [store, router],
         stubs: {
           'ProfileAvatar': true,
           'ProfileForm': true
@@ -79,11 +89,15 @@ describe('EditProfile', () => {
 
   it('loads profile data on mount', async () => {
     const store = createMockStore()
+    const router = createMockRouter()
+    await router.push('/edit-profile')
+    await router.isReady()
+    
     const loadProfileSpy = vi.spyOn(store._actions['user/loadProfile'], '0')
     
     mount(EditProfile, {
       global: {
-        plugins: [store],
+        plugins: [store, router],
         stubs: {
           'ProfileAvatar': true,
           'ProfileForm': true
@@ -96,9 +110,13 @@ describe('EditProfile', () => {
 
   it('toggles edit mode when clicking edit button', async () => {
     const store = createMockStore()
+    const router = createMockRouter()
+    await router.push('/edit-profile')
+    await router.isReady()
+    
     const wrapper = mount(EditProfile, {
       global: {
-        plugins: [store],
+        plugins: [store, router],
         stubs: {
           'ProfileAvatar': true,
           'ProfileForm': true
@@ -121,10 +139,14 @@ describe('EditProfile', () => {
 
   it('handles avatar updates in edit mode', async () => {
     const store = createMockStore()
+    const router = createMockRouter()
+    await router.push('/edit-profile')
+    await router.isReady()
+    
     const updateProfileSpy = vi.spyOn(store._actions['user/updateProfile'], '0')
     const wrapper = mount(EditProfile, {
       global: {
-        plugins: [store],
+        plugins: [store, router],
         stubs: {
           'ProfileAvatar': true,
           'ProfileForm': true
@@ -144,10 +166,14 @@ describe('EditProfile', () => {
 
   it('does not handle avatar updates when not in edit mode', async () => {
     const store = createMockStore()
+    const router = createMockRouter()
+    await router.push('/edit-profile')
+    await router.isReady()
+    
     const updateProfileSpy = vi.spyOn(store._actions['user/updateProfile'], '0')
     const wrapper = mount(EditProfile, {
       global: {
-        plugins: [store],
+        plugins: [store, router],
         stubs: {
           'ProfileAvatar': true,
           'ProfileForm': true
@@ -164,9 +190,13 @@ describe('EditProfile', () => {
 
   it('handles form submission', async () => {
     const store = createMockStore()
+    const router = createMockRouter()
+    await router.push('/edit-profile')
+    await router.isReady()
+    
     const wrapper = mount(EditProfile, {
       global: {
-        plugins: [store],
+        plugins: [store, router],
         stubs: {
           'ProfileAvatar': true,
           'ProfileForm': true
@@ -189,6 +219,8 @@ describe('EditProfile', () => {
   it('handles back navigation', async () => {
     const router = createMockRouter()
     const store = createMockStore()
+    await router.push('/edit-profile')
+    await router.isReady()
     
     const wrapper = mount(EditProfile, {
       global: {
@@ -200,7 +232,9 @@ describe('EditProfile', () => {
       }
     })
 
-    await wrapper.find('.back-btn').trigger('click')
+    const backButton = wrapper.find('.back-btn')
+    await backButton.trigger('click')
+
     expect(router.back).toHaveBeenCalled()
   })
 }) 
