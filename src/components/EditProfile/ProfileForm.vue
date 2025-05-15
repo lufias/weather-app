@@ -11,7 +11,8 @@
     <div class="form-group">
       <label>Phone Number</label>
       <div class="phone-input-wrapper">
-        <span class="flag">🇺🇸</span>
+        <img class="flag" src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/svg/1f1f2-1f1fe.svg" alt="Malaysian flag" />
+        <span class="country-code">+60</span>
         <input type="text" :value="user.phone" class="form-input phone-input" :disabled="disabled" />
       </div>
     </div>
@@ -38,6 +39,7 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 0 16px;
 }
 .form-group {
   display: flex;
@@ -63,8 +65,14 @@ const props = defineProps({
   gap: 8px;
 }
 .flag {
-  font-size: 1.2rem;
+  width: 1.5em;
+  height: 1.5em;
   margin-left: 8px;
+  vertical-align: middle;
+}
+.country-code {
+  color: #232c47;
+  font-weight: 500;
 }
 .phone-input {
   flex: 1;

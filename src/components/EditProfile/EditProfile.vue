@@ -6,6 +6,7 @@
       </button>
       <h2 class="title">Edit Profile</h2>
     </div>
+    <div class="half-circle-bg"></div>
     <ProfileAvatar :editable="isEditMode" />
     <ProfileForm :user="user" :disabled="!isEditMode" />
     <button class="action-btn" @click="toggleEditMode">
@@ -36,18 +37,21 @@ function toggleEditMode() {
 .edit-profile-container {
   max-width: 400px;
   margin: 0 auto;
-  padding: 32px 16px;
+  padding: 32px 0;
+  padding-top: 0;
   background: #fff;
   border-radius: 16px;
   position: relative;
+  overflow: hidden;
 }
-
-
 
 .title-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 2;
+  /* background: rgba(255,0,0,0.2);  */
 }
 .title {
   text-align: center;
@@ -58,7 +62,7 @@ function toggleEditMode() {
 .back-btn {
   position: absolute;
   left: 16px;
-  top: 32px;
+  top: 0;
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -77,6 +81,23 @@ function toggleEditMode() {
   font-weight: 600;
   letter-spacing: 1px;
   cursor: pointer;
+}
+
+.half-circle-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(180deg, #f5f8ff 80%, rgba(245,248,255,0) 100%);
+  border-bottom-left-radius: 100% 45px;
+  border-bottom-right-radius: 100% 45px;
+  z-index: 1;
+}
+
+.ProfileAvatar, .profile-avatar, .avatar-wrapper {
+  position: relative;
+  z-index: 2;
 }
 
 @media screen and (max-width: 768px) {

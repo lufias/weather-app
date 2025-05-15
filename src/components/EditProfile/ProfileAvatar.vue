@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { defineProps } from 'vue';
+import defaultAvatarImg from '../../assets/avatar.png';
+const defaultAvatar = defaultAvatarImg; // Local default avatar
+const props = defineProps({
+  avatar: { type: String, default: '' },
+  editable: { type: Boolean, default: false }
+});
+</script>
+
 <template>
   <div class="avatar-wrapper">
     <img :src="avatar || defaultAvatar" class="avatar-img" alt="Profile avatar" />
@@ -9,15 +19,6 @@
     </span>
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineProps } from 'vue';
-const defaultAvatar = 'https://i.imgur.com/1Q9Z1Zm.png'; // Placeholder avatar
-const props = defineProps({
-  avatar: { type: String, default: '' },
-  editable: { type: Boolean, default: false }
-});
-</script>
 
 <style scoped>
 .avatar-wrapper {
