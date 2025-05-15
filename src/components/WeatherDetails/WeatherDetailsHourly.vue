@@ -33,8 +33,8 @@ const hourlyForecast = computed<HourlyForecast[]>(() => {
 <style scoped>
 .weather-details-hourly {
   margin-top: 1.5rem;
-  margin-left: 16px;
-  margin-right: 16px;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .hourly-title {
   font-size: 1.15rem;

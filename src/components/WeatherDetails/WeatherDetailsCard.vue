@@ -91,13 +91,13 @@ const weatherIcon = computed(() => {
 .weather-details-card {
   background: #f3f4f6;
   border-radius: 1rem;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 0.0625rem 0.375rem rgba(0,0,0,0.04);
   padding: 1rem 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 90px;
-  min-height: 120px;
+  min-width: 5.625rem;
+  min-height: 7.5rem;
   gap: 0.3rem;
 }
 
@@ -105,7 +105,7 @@ const weatherIcon = computed(() => {
   background: #dbe6ff;
   flex-direction: row;
   align-items: center;
-  min-height: 80px;
+  min-height: 5rem;
   min-width: 0;
   padding: 1.2rem 2rem;
   justify-content: space-between;
@@ -120,15 +120,15 @@ const weatherIcon = computed(() => {
 .icon-circle {
   background: #b6caff;
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .icon-circle img {
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
 }
 .weekly-info {
   display: flex;
@@ -136,12 +136,12 @@ const weatherIcon = computed(() => {
   justify-content: center;
 }
 .weekly-day {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #222;
 }
 .weekly-desc {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: #201C1C;
   font-weight: 400;
   margin-top: 0.1rem;
@@ -151,12 +151,12 @@ const weatherIcon = computed(() => {
   align-items: center;  
 }
 .weekly-temp {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #201C1C;
 }
 .weekly-arrow {
-  font-size: 13px;
+  font-size: 0.75rem;
   color: #222;
   margin-left: 0.2rem;
 }
@@ -180,14 +180,14 @@ const weatherIcon = computed(() => {
 .icon-circle-hourly {
   background: #e0e7ef;
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 3.125rem;
+  height: 3.125rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .icon-circle-hourly img {
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
 }
 </style> 

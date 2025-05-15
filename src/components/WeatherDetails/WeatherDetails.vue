@@ -104,12 +104,14 @@ watch(
 <style scoped>
 .weather-details {
   width: 100%;
-  max-width: 480px;  
+  max-width: 30rem;
   background: #fff;
   border-radius: 1.2rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);  
+  box-shadow: 0 0.125rem 0.75rem rgba(0,0,0,0.04);  
   display: flex;
   flex-direction: column;  
+  height: 12.5rem;
+  border: 0.0625rem solid #e2e8f0;
 }
 .placeholder {
   display: flex;
@@ -142,7 +144,7 @@ watch(
   color: #475569;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   .back-button {
     display: flex;
   }

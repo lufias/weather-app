@@ -129,11 +129,11 @@ $scrollbar-track: #f7f8fa;
   padding: 0.6rem 2.6rem 0.6rem 3.6rem;
   font-family: 'SF Pro Display', Arial, sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1;
-  letter-spacing: 3%;
+  letter-spacing: -0.03125rem;
   color: #000;
-  border: 1px solid $input-border;
+  border: 0.0625rem solid $input-border;
   border-radius: $input-radius;
   outline: none;
   transition: border 0.2s;
@@ -173,8 +173,8 @@ $scrollbar-track: #f7f8fa;
   position: absolute;
   right: 0.8rem;
   background: none;
-  border: 0.1rem solid $search-color;
-  font-size: 1.1rem;
+  border: 0.0625rem solid $search-color;
+  font-size: 0.875rem;
   color: $search-color;
   cursor: pointer;
   padding: 0;
@@ -200,7 +200,7 @@ $scrollbar-track: #f7f8fa;
   left: 0;
   right: 0;
   background: #fff;
-  border: 1px solid #eee;
+  border: 0.0625rem solid #eee;
   border-radius: $input-radius;
   margin-top: 0.4rem;
   box-shadow: 0 0.2rem 0.8rem rgba(0,0,0,0.08);
@@ -249,7 +249,7 @@ $scrollbar-track: #f7f8fa;
   .state-country {
     font-weight: 500;
     color: #888;
-    margin-left: 2px;
+    margin-left: 0.125rem;
   }
 }
 </style> 

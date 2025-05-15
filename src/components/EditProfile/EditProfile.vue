@@ -73,12 +73,12 @@ function handleBack() {
 
 <style scoped>
 .edit-profile-container {
-  max-width: 400px;
+  max-width: 25rem;
   margin: 0 auto;
-  padding: 32px 0;
+  padding: 2rem 0;
   padding-top: 0;
   background: #fff;
-  border-radius: 16px;
+  border-radius: 1rem;
   position: relative;
   overflow: hidden;
 }
@@ -95,11 +95,11 @@ function handleBack() {
   text-align: center;
   font-size: 1.6rem;
   font-weight: bold;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 .back-btn {
   position: absolute;
-  left: 16px;
+  left: 1rem;
   top: 0;
   background: none;
   border: none;
@@ -108,16 +108,16 @@ function handleBack() {
   visibility: hidden;
 }
 .action-btn {
-  width: calc(100% - 32px);
-  margin: 32px 16px;
-  padding: 16px 0;
+  width: calc(100% - 2rem);
+  margin: 2rem 1rem;
+  padding: 1rem 0;
   background: #232c47;
   color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   font-size: 1.1rem;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.0625rem;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -131,9 +131,9 @@ function handleBack() {
   top: 0;
   left: 0;
   width: 100%;
-  height: 120px;
+  height: 7.5rem;
   background: linear-gradient(180deg, #f5f8ff 80%, rgba(245,248,255,0) 100%);
-  border-bottom-left-radius: 100% 45px;
+  border-bottom-left-radius: 100% 2.8125rem;
   border-bottom-right-radius: 100% 45px;
   z-index: 1;
 }

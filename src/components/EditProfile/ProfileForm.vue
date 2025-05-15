@@ -86,18 +86,18 @@ async function handleSubmit() {
 .profile-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 0 16px;
+  gap: 1rem;
+  padding: 0 1rem;
 }
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.375rem;
 }
 .form-input {
-  padding: 12px 14px;
-  border: 1.5px solid #e5e7eb;
-  border-radius: 8px;
+  padding: 0.75rem 0.875rem;
+  border: 0.09375rem solid #e5e7eb;
+  border-radius: 0.5rem;
   font-size: 1rem;
   background: #f7f8fa;
   color: #232c47;
@@ -105,7 +105,7 @@ async function handleSubmit() {
   transition: border 0.2s;
 }
 .form-input:focus {
-  border: 1.5px solid #232c47;
+  border: 0.09375rem solid #232c47;
 }
 .form-input:disabled {
   background: #f7f8fa;
@@ -115,12 +115,12 @@ async function handleSubmit() {
 .phone-input-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
 .flag {
   width: 1.5em;
   height: 1.5em;
-  margin-left: 8px;
+  margin-left: 0.5rem;
   vertical-align: middle;
 }
 .country-code {

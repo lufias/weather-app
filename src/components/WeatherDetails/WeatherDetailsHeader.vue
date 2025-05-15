@@ -101,16 +101,16 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 28px 1rem;
-  margin-bottom: 24px;
-  padding-top: 29px;
+  padding: 1.75rem 1rem;
+  margin-bottom: 1.5rem;
+  padding-top: 1.8125rem;
 
   .icon-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 13px;
-    height: 13px;
+    width: 0.8125rem;
+    height: 0.8125rem;
     padding: 0;
     background: none;
     border: none;
@@ -121,13 +121,13 @@ onMounted(() => {
     &.back-button {
       visibility: hidden; // Hide by default on desktop
 
-      @media (max-width: 768px) {
+      @media (max-width: 48rem) {
         visibility: visible; // Show on mobile        
       }
     }
 
     i {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       line-height: 1;
       display: flex;
       align-items: center;
@@ -140,7 +140,7 @@ onMounted(() => {
   }
 
   .header-location {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
     margin: 0 1rem;
     text-transform: capitalize;
@@ -148,28 +148,28 @@ onMounted(() => {
 }
 
 .header-date {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;  
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 
 .header-icon {
-  margin-bottom: 8px;
+  margin-bottom: 2rem;
   img {
-    width: 64px;
-    height: 64px;
+    width: 4rem;
+    height: 4rem;
   }
 }
 
 .header-temp {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 400;
 }
 
 .header-desc {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 32px;
+  margin-bottom: 0.5rem;
   text-transform: capitalize;
 }
 </style> 

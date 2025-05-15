@@ -81,6 +81,9 @@ onMounted(async () => {
   justify-content: flex-start;
   align-items: center;
   position: relative;
+  border-bottom: 0.0625rem solid var(--border-color);
+  box-shadow: 0 0.125rem 0.5rem rgba(99,102,241,0.08);
+  max-width: 37.5rem;
 }
 
 .weather-list.mobile {

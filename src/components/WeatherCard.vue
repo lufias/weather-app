@@ -70,7 +70,7 @@ const cardStyle = computed(() => {
 <style lang="scss" scoped>
 .weather-card {
   width: 100%;
-  max-width: 600px;
+  max-width: 37.5rem;
   margin: 0 auto;
   box-sizing: border-box;
   color: #fff;
@@ -96,7 +96,7 @@ const cardStyle = computed(() => {
     font-size: 1.2rem;
     font-weight: 700;
     &.main {
-      font-size: 1.3rem;
+      font-size: 1.5625rem; // 25px
     }
   }
 

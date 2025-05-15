@@ -19,16 +19,16 @@ const props = defineProps({
 <style scoped>
 .profile-info {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 .profile-name {
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 }
 .profile-contact {
   color: #555;
   font-size: 1rem;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.0125rem;
 }
 </style> 

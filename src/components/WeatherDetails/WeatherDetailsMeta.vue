@@ -44,9 +44,9 @@ const handleRefresh = () => {
 
 .meta-update {
   text-align: center;  
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;

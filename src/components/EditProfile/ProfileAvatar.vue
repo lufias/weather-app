@@ -88,9 +88,9 @@ function convertToBase64(file: File): Promise<string> {
 <style scoped>
 .avatar-wrapper {
   position: relative;
-  width: 110px;
-  height: 110px;
-  margin: 0 auto 12px auto;
+  width: 6.875rem;
+  height: 6.875rem;
+  margin: 0 auto 0.75rem auto;
 }
 
 .avatar-img {
@@ -98,8 +98,8 @@ function convertToBase64(file: File): Promise<string> {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  border: 0.25rem solid #fff;
+  box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.07);
 }
 
 .file-input {
@@ -112,8 +112,8 @@ function convertToBase64(file: File): Promise<string> {
   bottom: 0;
   background: #fff;
   border-radius: 50%;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
-  padding: 4px;
+  box-shadow: 0 0.0625rem 0.25rem rgba(0,0,0,0.10);
+  padding: 0.25rem;
   cursor: pointer;
   display: flex;
   align-items: center;

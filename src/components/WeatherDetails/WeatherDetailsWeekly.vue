@@ -33,8 +33,8 @@ const dailyForecast = computed<DailyForecast[]>(() => {
 <style scoped>
 .weather-details-weekly {
   margin-top: 2rem;
-  margin-left: 16px;
-  margin-right: 16px;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .weekly-title {
   font-size: 1.15rem;

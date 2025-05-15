@@ -47,14 +47,14 @@ import Header from './Header.vue';
 
 .split-layout__left::-webkit-scrollbar,
 .split-layout__right::-webkit-scrollbar {
-  width: 4px;
+  width: 0.25rem;
   background: transparent;
 }
 
 .split-layout__left::-webkit-scrollbar-thumb,
 .split-layout__right::-webkit-scrollbar-thumb {
   background: transparent;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   transition: background 0.3s;
 }
 
