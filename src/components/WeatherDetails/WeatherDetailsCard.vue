@@ -59,30 +59,31 @@ const weatherIcon = computed(() => {
   <div
     class="weather-details-card"
     :class="{ weekly: type === 'weekly' }"
+    data-testid="weather-card"
   >
     <template v-if="type === 'weekly'">
       <div class="weekly-left">
         <div class="icon-circle">
-          <img :src="weatherIcon" :alt="props.data.weather[0].description" />
+          <img :src="weatherIcon" :alt="props.data.weather[0].description" data-testid="weather-icon" />
         </div>
         <div class="weekly-info">
-          <div class="weekly-day">{{ fullDay }}</div>
-          <div class="weekly-desc">{{ props.data.weather[0].main }}</div>
+          <div class="weekly-day" data-testid="weekly-day">{{ fullDay }}</div>
+          <div class="weekly-desc" data-testid="weather-description">{{ props.data.weather[0].main }}</div>
         </div>
       </div>
       <div class="weekly-right">
-        <span class="weekly-temp">{{ dailyTemp?.max }}º C</span>
+        <span class="weekly-temp" data-testid="weekly-temp">{{ dailyTemp?.max }}º C</span>
         <span class="weekly-arrow">&#9654;</span>
       </div>
     </template>
     <template v-else>
       <div class="card-icon">
         <div class="icon-circle-hourly">
-          <img :src="weatherIcon" :alt="props.data.weather[0].description" />
+          <img :src="weatherIcon" :alt="props.data.weather[0].description" data-testid="weather-icon" />
         </div>
       </div>
-      <div class="card-temp">{{ hourlyTemp }}°</div>
-      <div class="card-time">{{ formattedTime }}</div>
+      <div class="card-temp" data-testid="hourly-temp">{{ hourlyTemp }}°</div>
+      <div class="card-time" data-testid="hourly-time">{{ formattedTime }}</div>
     </template>
   </div>
 </template>

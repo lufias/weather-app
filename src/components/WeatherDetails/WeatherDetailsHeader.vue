@@ -53,36 +53,34 @@ const handleRefresh = async () => {
     ]);
   }
 };
-onMounted(() => {
-  console.log('WeatherDetailsHeader mounted');
-  console.log({ props });
-});
 </script>
 
 <template>
-  <div class="weather-details-header">
+  <div class="weather-details-header" data-testid="weather-details-header">
     <!-- Location section with icons -->
     <div class="location-container">
-      <button class="icon-button back-button" @click="handleBack">
+      <button class="icon-button back-button" @click="handleBack" data-testid="back-button">
         <i class="fas fa-arrow-left"></i>
       </button>
-      <div class="header-location">{{ location.city }}</div>
-      <button class="icon-button" @click="handleDelete">
+      <div class="header-location" data-testid="location-name">{{ location.city }}</div>
+      <button class="icon-button" @click="handleDelete" data-testid="delete-button">
         <FontAwesomeIcon :icon="faTrashAlt" />
       </button>
     </div>
-    <div class="header-date">{{ formattedDate }}</div>
+    <div class="header-date" data-testid="weather-date">{{ formattedDate }}</div>
     <div class="header-icon">
       <img 
         :src="`https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`" 
         :alt="currentWeather.weather[0].description"
+        data-testid="weather-icon"
       />
     </div>
-    <div class="header-temp">{{ Math.round(currentWeather.temp) }}° C</div>
-    <div class="header-desc">{{ currentWeather.weather[0].description }}</div>
+    <div class="header-temp" data-testid="weather-temp">{{ Math.round(currentWeather.temp) }}° C</div>
+    <div class="header-desc" data-testid="weather-description">{{ currentWeather.weather[0].description }}</div>
     <WeatherDetailsMeta 
       :current-weather="currentWeather" 
       @refresh="handleRefresh"
+      data-testid="weather-details-meta"
     />
   </div>
 </template>
