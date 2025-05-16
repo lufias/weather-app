@@ -2,6 +2,8 @@
 
 This is a demo application created as an interview assessment for the Senior Vue.js Frontend Developer position at Tawk Sdn Bhd. The application demonstrates modern Vue.js development practices, TypeScript integration, and various frontend technologies.
 
+🌐 **Live Demo**: [https://cheerful-peony-018d79.netlify.app/](https://cheerful-peony-018d79.netlify.app/)
+
 ## 🚀 Features
 
 - Real-time weather information display
