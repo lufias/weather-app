@@ -30,8 +30,6 @@ const fullDay = computed(() => {
   return '';
 });
 
-const isHourly = computed(() => props.type === 'hourly');
-
 const hourlyTemp = computed(() => {
   if (props.type === 'hourly') {
     return Math.round((props.data as HourlyForecast).temp);

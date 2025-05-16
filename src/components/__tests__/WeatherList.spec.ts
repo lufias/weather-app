@@ -34,7 +34,7 @@ const createMockStore = () => {
       weather: {
         namespaced: true,
         getters: {
-          getCurrentWeather: () => (id: number) => ({
+          getCurrentWeather: () => () => ({
             temp: 20,
             weather: [{ description: 'Sunny', icon: '01d' }],
             dt: 1234567890

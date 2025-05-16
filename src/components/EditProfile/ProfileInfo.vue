@@ -6,14 +6,15 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
-const props = defineProps({
-  user: {
-    type: Object,
-    required: true,
-    default: () => ({ name: '', email: '', phone: '' })
-  }
-});
+interface User {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+defineProps<{
+  user: User;
+}>();
 </script>
 
 <style scoped>

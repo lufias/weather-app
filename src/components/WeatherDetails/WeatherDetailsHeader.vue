@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import type { CurrentWeather } from '../../store/modules/weather';
 import type { Location } from '../../store/modules/locations';
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
   currentWeather: CurrentWeather;
