@@ -45,20 +45,20 @@ const cardStyle = computed(() => {
 </script>
 
 <template>
-  <div class="weather-card" :class="{ 'current-location': props.isCurrentLocation }" :style="cardStyle">
+  <div class="weather-card" :class="{ 'current-location': props.isCurrentLocation }" :style="cardStyle" data-testid="weather-card">
     <div class="weather-card__header">
       <div>
-        <div class="weather-card__location main">
+        <div class="weather-card__location main" data-testid="weather-location">
           <span v-if="props.isCurrentLocation">My Location</span>
           <span v-else>{{ props.location }}</span>
         </div>
-        <div class="weather-card__time" v-if="props.time">{{ props.time }}</div>
+        <div class="weather-card__time" v-if="props.time" data-testid="weather-time">{{ props.time }}</div>
       </div>
-      <div class="weather-card__temp">{{ props.temperature }}<span class="weather-card__degree">°</span></div>
+      <div class="weather-card__temp" data-testid="weather-temperature">{{ props.temperature }}<span class="weather-card__degree">°</span></div>
     </div>
     <div class="weather-card__desc-footer-row">
-      <div class="weather-card__desc">{{ capitalizeFirst(props.description) }}</div>
-      <div class="weather-card__footer">
+      <div class="weather-card__desc" data-testid="weather-description">{{ capitalizeFirst(props.description) }}</div>
+      <div class="weather-card__footer" data-testid="weather-temp-range">
         <span v-if="props.high !== undefined && props.low !== undefined">
           H:{{ props.high }}°&nbsp;&nbsp;&nbsp;L:{{ props.low }}°
         </span>

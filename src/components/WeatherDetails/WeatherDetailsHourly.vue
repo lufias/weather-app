@@ -17,14 +17,15 @@ const hourlyForecast = computed<HourlyForecast[]>(() => {
 </script>
 
 <template>
-  <div class="weather-details-hourly">
-    <div class="hourly-title">Hourly Forecast</div>
-    <div class="hourly-list">
+  <div class="weather-details-hourly" data-testid="weather-details-hourly">
+    <div class="hourly-title" data-testid="hourly-title">Hourly Forecast</div>
+    <div class="hourly-list" data-testid="hourly-list">
       <WeatherDetailsCard 
         v-for="hour in hourlyForecast.slice(0, 4)" 
         :key="hour.dt"
         :type="'hourly'"
         :data="hour"
+        data-testid="hourly-forecast-card"
       />
     </div>
   </div>
