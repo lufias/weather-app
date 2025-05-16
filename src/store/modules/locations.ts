@@ -45,19 +45,36 @@ const locations: Module<LocationsState, any> = {
 
   actions: {
     async addLocation({ commit, dispatch, state }, location: Location) {
-      const existing = state.locations.find(
-        (loc: Location) => loc.lat === location.lat && loc.lon === location.lon
-      );
-      if (existing) return { status: 'duplicate' };
-      const id = await db.locations.add(location);
-      const newLoc = { ...location, id };
-      commit('ADD_LOCATION', newLoc);
-      await dispatch('weather/fetchCurrentWeather', {
-        locationId: id,
-        lat: location.lat,
-        lon: location.lon
-      }, { root: true });
-      return { status: 'success' };
+      try {
+        const existing = state.locations.find(
+          (loc: Location) => loc.lat === location.lat && loc.lon === location.lon
+        );
+        if (existing) return { status: 'duplicate' };
+        
+        const id = await db.locations.add(location);
+        const newLoc = { ...location, id };
+        commit('ADD_LOCATION', newLoc);
+        
+        try {
+          await dispatch('weather/fetchCurrentWeather', {
+            locationId: id,
+            lat: location.lat,
+            lon: location.lon
+          }, { root: true });
+        } catch (error) {
+          console.error('Error fetching weather for new location:', error);
+          // Remove the location if weather fetch fails
+          await db.locations.delete(id);
+          commit('REMOVE_ALL_LOCATIONS');
+          await dispatch('loadLocations');
+          throw error;
+        }
+        
+        return { status: 'success' };
+      } catch (error) {
+        console.error('Error adding location:', error);
+        throw error;
+      }
     },
     async loadLocations({ commit }) {
       const locations = await db.locations.toArray()

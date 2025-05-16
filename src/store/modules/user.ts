@@ -21,7 +21,7 @@ const userModule: Module<UserState, RootState> = {
     profile: {
       name: 'Jane Doe',
       email: 'jane@gmail.com',
-      phone: '+01 234 567 89',
+      phone: '125555888',
       avatar: ''
     },
     profileId: undefined

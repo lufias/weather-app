@@ -116,26 +116,42 @@ const weather: Module<WeatherState, any> = {
   },
   actions: {
     async fetchCurrentWeather({ commit }, { locationId, lat, lon }) {
-      const url = `${API_ENDPOINTS.oneCall}?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${API_KEY}&units=${DEFAULT_UNITS}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      commit('SET_CURRENT_WEATHER', { locationId, weather: data.current });
+      try {
+        const url = `${API_ENDPOINTS.oneCall}?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${API_KEY}&units=${DEFAULT_UNITS}`;
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error(`Weather API error: ${res.status} ${res.statusText}`);
+        }
+        const data = await res.json();
+        commit('SET_CURRENT_WEATHER', { locationId, weather: data.current });
+      } catch (error) {
+        console.error('Error fetching current weather:', error);
+        throw error; // Propagate error to caller
+      }
     },
     async fetchWeatherDetails({ commit }, { locationId, lat, lon }) {
-      const url = `${API_ENDPOINTS.oneCall}?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${API_KEY}&units=${DEFAULT_UNITS}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      commit('SET_WEATHER_DETAILS', { 
-        locationId, 
-        details: {
-          lat: data.lat,
-          lon: data.lon,
-          timezone: data.timezone,
-          timezone_offset: data.timezone_offset,
-          hourly: data.hourly,
-          daily: data.daily
+      try {
+        const url = `${API_ENDPOINTS.oneCall}?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${API_KEY}&units=${DEFAULT_UNITS}`;
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error(`Weather API error: ${res.status} ${res.statusText}`);
         }
-      });
+        const data = await res.json();
+        commit('SET_WEATHER_DETAILS', { 
+          locationId, 
+          details: {
+            lat: data.lat,
+            lon: data.lon,
+            timezone: data.timezone,
+            timezone_offset: data.timezone_offset,
+            hourly: data.hourly,
+            daily: data.daily
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching weather details:', error);
+        throw error; // Propagate error to caller
+      }
     },
     removeWeather({ commit }, locationId) {
       commit('REMOVE_WEATHER', locationId);
